@@ -19,4 +19,5 @@ abstract class BaseDao {
     
     static function modificar($dto);
     
+    static function listarTodos();
 }
