@@ -91,11 +91,14 @@ class UsuarioDaoImp implements BaseDao {
         try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut= ? AND contrasena = ?");
-            $stmt->bindValue(1, $dto->getRut());
-            $stmt->bindValue(2, $dto->getContrasena());
+            $rut = $dto->getRut();
+            $pass = $dto->getContrasena();
+            $stmt->bindParam(1, $rut);
+            $stmt->bindParam(2, $pass);
             $stmt->execute();
             
-            if ($stmt->rowCount() > 0) {
+            $resultado = $stmt->fetchColumn();
+            if ($resultado != null) {
                 return true;
             }
             $pdo = null;
