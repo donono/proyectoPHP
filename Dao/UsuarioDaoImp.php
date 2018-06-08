@@ -87,6 +87,27 @@ class UsuarioDaoImp implements BaseDao {
         return false;
     }
 
+    public static function validarRut($key) {
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut = ?");
+            $stmt->bindParam(1, $key);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+
+            foreach ($resultado as $value) {
+                if ($value["rut"] == $key) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            $pdo = null;
+        } catch (Exception $ex) {
+            throw new Exception("Error al validar un usuario. Trace: " . $ex->getTraceAsString());
+        }
+    }
+
     public static function login($dto) {
         try {
             $pdo = new clasePDO();
@@ -96,16 +117,18 @@ class UsuarioDaoImp implements BaseDao {
             $stmt->bindParam(1, $rut);
             $stmt->bindParam(2, $pass);
             $stmt->execute();
-            
-            $resultado = $stmt->fetchColumn();
-            if ($resultado != null) {
-                return true;
+            $resultado = $stmt->fetchAll();
+            foreach ($resultado as $value) {
+                if ($value["rut"] == $rut && $value["contrasena"] == $pass) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
             $pdo = null;
         } catch (Exception $ex) {
             throw new Exception("Error al validar un usuario. Trace: " . $ex->getTraceAsString());
         }
-        return false;
     }
 
 }
