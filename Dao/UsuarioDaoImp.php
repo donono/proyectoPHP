@@ -1,9 +1,9 @@
 <?php
 
-include_once './BaseDao.php';
+include_once 'BaseDao.php';
 include_once '../Sql/ClasePdo.php';
 
-class UsuarioDaoImp extends BaseDao {
+class UsuarioDaoImp implements BaseDao {
 
     public static function agregar($dto) {
 

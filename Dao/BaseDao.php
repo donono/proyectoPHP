@@ -11,13 +11,13 @@
  *
  * @author Daniel GS
  */
-abstract class BaseDao {
+interface BaseDao {
 
-    static function agregar($dto);
+    public static function agregar($dto);
     
-    static function eliminar($key);
+    public static function eliminar($key);
     
-    static function modificar($dto);
+    public static function modificar($dto);
     
-    static function listarTodos();
+    public static function listarTodos();
 }
