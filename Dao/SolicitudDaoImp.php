@@ -26,5 +26,27 @@ class SolicitudDaoImp {
         }
         return false;
     }
+    
+    function MostrarPorRut($rut){
+        $listaSolicitud = new ArrayObject();
+        try{
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT estado FROM solicitud WHERE rut = ?");
+            $stmt->bindParam(1, $rut);
+            $stmt->execute();
+            
+            $rs = $stmt->fetchAll();
+            
+            foreach ($rs as $sol) {
+                $dto = new SolicitudDto();
+                $dto->setEstado($sol['estado']);
+                $listaSolicitud->append($dto);
+            }
+            return $listaSolicitud;
+            
+        } catch (Exception $ex) {
+
+        }
+    }
 
 }
