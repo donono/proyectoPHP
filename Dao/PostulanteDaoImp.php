@@ -1,7 +1,7 @@
 <?php
 
 include_once '../Sql/ClasePdo.php';
-include_once './BaseDao.php';
+include_once 'BaseDao.php';
 include_once '../Dto/PostulanteDto.php';
 
 class PostulanteDaoImp implements BaseDao {
@@ -11,7 +11,7 @@ class PostulanteDaoImp implements BaseDao {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("INSERT INTO postulante "
                     . "(rut, nombre, ap_paterno, ap_materno, fecha_nacimiento, sexo, telefono, hijos, email, "
-                    . "direccion,enfermedad, sueldo, estado, renta, educacion, comuna) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    . "direccion,enfermedad, sueldo, id_estado, id_renta, id_educacion, id_comuna) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             $stmt->bindParam(1, $rut);
             $stmt->bindParam(2, $nombre);
@@ -34,14 +34,14 @@ class PostulanteDaoImp implements BaseDao {
             $nombre = $dto->getNombre();
             $ap_paterno = $dto->getAp_paterno();
             $ap_materno = $dto->getAp_materno();
-            $sexo = $dto-getSexo();
+            $sexo = $dto->getSexo();
             $telefono = $dto->getTelefono();
             $hijos = $dto->getHijos();
             $email = $dto->getEmail();
             $direccion = $dto->getDireccion();
             $enfermedad = $dto->getEnfermedad();
             $sueldo = $dto->getSueldo();
-            $estado = $dto->getEstado();
+            $estado = $dto->getEstadoCivil();
             $renta = $dto->getRenta();
             $educacion = $dto->getEducacion();
             $comuna = $dto->getComuna();
