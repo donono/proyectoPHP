@@ -4,10 +4,12 @@
 class SolicitudDto {
     private $id;
     private $estado;
+    private $rut;
     
     function __construct() {
-        $this->id = 0;
+        $this->id = "";
         $this->estado = "";
+        $this->rut = "";
     }
     
     function getId() {
@@ -25,6 +27,16 @@ class SolicitudDto {
     function setEstado($estado) {
         $this->estado = $estado;
     }
+    
+    function getRut() {
+        return $this->rut;
+    }
+
+    function setRut($rut) {
+        $this->rut = $rut;
+    }
+
+
 
 
 

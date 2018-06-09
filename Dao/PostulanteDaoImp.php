@@ -3,6 +3,7 @@
 include_once '../Sql/ClasePdo.php';
 include_once 'BaseDao.php';
 include_once '../Dto/PostulanteDto.php';
+include_once '../Dto/SolicitudDto.php';
 
 class PostulanteDaoImp implements BaseDao {
 
@@ -45,6 +46,7 @@ class PostulanteDaoImp implements BaseDao {
             $renta = $dto->getRenta();
             $educacion = $dto->getEducacion();
             $comuna = $dto->getComuna();
+           
             
             $stmt->execute();
             
