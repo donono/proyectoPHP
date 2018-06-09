@@ -38,10 +38,26 @@ class PostulanteDaoImp implements BaseDao {
             $telefono = $dto->getTelefono();
             $hijos = $dto->getHijos();
             $email = $dto->getEmail();
+            $direccion = $dto->getDireccion();
+            $enfermedad = $dto->getEnfermedad();
+            $sueldo = $dto->getSueldo();
+            $estado = $dto->getEstado();
+            $renta = $dto->getRenta();
+            $educacion = $dto->getEducacion();
+            $comuna = $dto->getComuna();
+            
+            $stmt->execute();
+            
+            if($stmt->rowCount()>0){
+                return true;
+            }
+            
+            $pdo = null;
             
         } catch (Exception $ex) {
-            
+            echo "No se pudo agregar. Stacktrace: " . $ex->getMessage();
         }
+        return false;
     }
 
     public static function eliminar($key) {
