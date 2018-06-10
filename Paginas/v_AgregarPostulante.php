@@ -69,7 +69,7 @@ and open the template in the editor.
 
                         <tr>
                             <td>Sexo</td>
-                            <td>M<input type="radio" name="radioSexo" value="" /> F<input type="radio" name="radioSexo" value="" /></td>
+                            <td>M<input type="radio" name="radioSexo" value="M" /> F<input type="radio" name="radioSexo" value="F" /></td>
                             <td>Renta</td>
                             <td><select name="dropRenta">
                                     <option value="" disabled="" selected="true">Seleccionar...</option>
@@ -103,7 +103,7 @@ and open the template in the editor.
                             <td>Hijos</td>
                             <td><input type="checkbox" name="checkHijos" value="ON" /> Cantidad <input type="text" name="txtHijos" value="" style="width: 30px" /></td>
                             <td>Padece Enfermedades Crónicas</td>
-                            <td><input type="checkbox" name="checkEnfermedad" value="OFF" /></td>
+                            <td><input type="checkbox" name="checkEnfermedad" value="ON" /></td>
                         </tr>
                     </tbody>
                 </table>

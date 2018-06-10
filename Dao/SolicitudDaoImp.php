@@ -5,7 +5,7 @@ include_once '../Sql/ClasePdo.php';
 
 class SolicitudDaoImp {
 
-    function AgregarSolicitud($dto) {
+    public static function AgregarSolicitud($dto) {
         try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("INSERT INTO solicitud (rut, estado) VALUES (?,?)");
@@ -27,7 +27,7 @@ class SolicitudDaoImp {
         return false;
     }
     
-    function MostrarPorRut($rut){
+    static function MostrarPorRut($rut){
         $listaSolicitud = new ArrayObject();
         try{
             $pdo = new clasePDO();

@@ -35,6 +35,7 @@ class PostulanteDaoImp implements BaseDao {
             $nombre = $dto->getNombre();
             $ap_paterno = $dto->getAp_paterno();
             $ap_materno = $dto->getAp_materno();
+            $fecha_nacimiento = $dto->getFechaNacimiento();
             $sexo = $dto->getSexo();
             $telefono = $dto->getTelefono();
             $hijos = $dto->getHijos();

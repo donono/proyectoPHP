@@ -25,7 +25,7 @@ class PostulanteDto {
         $this->ap_paterno = "";
         $this->ap_materno = "";
 
-        $this->fechaNacimiento = date("d-m-Y");
+        $this->fechaNacimiento = "";
         $this->sexo = "";
         $this->hijos = "";
         $this->telefono = "";
