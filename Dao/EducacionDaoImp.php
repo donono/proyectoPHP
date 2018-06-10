@@ -4,16 +4,16 @@ include_once '../Sql/ClasePdo.php';
 
 class EducacionDaoImp {
 
-    static function Listar() {
+    public static function Listar() {
         $edu = new ArrayObject();
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("SELECT DISTINCT nombre FROM educacion ORDER DESC");
+            $stmt = $pdo->prepare("SELECT DISTINCT nombre FROM educacion");
             $stmt->execute();
 
             $res = $stmt->fetchAll();
             foreach ($res as $educacion) {
-                $edu->append($educacion['descripcion']);
+                $edu->append($educacion['nombre']);
             }
             return $edu;
         } catch (Exception $ex) {

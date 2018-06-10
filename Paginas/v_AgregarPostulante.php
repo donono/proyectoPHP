@@ -40,7 +40,14 @@ and open the template in the editor.
                             <td><input type="text" name="txtMaterno" value="" /></td>
                             <td>Comuna</td>
                             <td><select name="dropComuna">
-                                    <option></option>
+                                    <option value="" disabled="" selected="true">Seleccionar...</option>
+                                    <?php
+                                    include_once '../Dao/ComunaDaoImp.php';
+                                    $opcion = ComunaDaoImp::ListarTodas();
+                                    foreach ($opcion as $value) {
+                                        echo "<option> $value </option>";
+                                    }
+                                    ?>
                                 </select></td>
                         </tr>
 
@@ -49,7 +56,14 @@ and open the template in the editor.
                             <td><input type="date" name="dateNacimiento" value="" /></td>
                             <td>Educación</td>
                             <td><select name="dropEducacion">
-                                    <option></option>
+                                    <option value="" disabled="" selected="true">Seleccionar...</option>
+                                    <?php
+                                    include_once '../Dao/EducacionDaoImp.php';
+                                    $opcion = EducacionDaoImp::Listar();
+                                    foreach ($opcion as $value) {
+                                        echo "<option> $value </option>";
+                                    }
+                                    ?>
                                 </select></td>
                         </tr>
 
@@ -58,14 +72,28 @@ and open the template in the editor.
                             <td>M<input type="radio" name="radioSexo" value="" /> F<input type="radio" name="radioSexo" value="" /></td>
                             <td>Renta</td>
                             <td><select name="dropRenta">
-                                    <option></option>
+                                    <option value="" disabled="" selected="true">Seleccionar...</option>
+                                    <?php
+                                    include_once '../Dao/RentaDaoImp.php';
+                                    $opcion = RentaDaoImp::Listar();
+                                    foreach ($opcion as $value) {
+                                        echo "<option> $value </option>";
+                                    }
+                                    ?>
                                 </select></td>
                         </tr>
 
                         <tr>
                             <td>Estado Civil</td>
                             <td><select name="dropEstadoCivil">
-                                    <option></option>
+                                    <option value="" disabled="" selected="true">Seleccionar...</option>
+                                    <?php
+                                    include_once '../Dao/EstadoCivilDaoImp.php';
+                                    $opcion = EstadoCivilDaoImp::Listar();
+                                    foreach ($opcion as $value) {
+                                        echo "<option> $value </option>";
+                                    }
+                                    ?>
                                 </select></td>
                             <td>Sueldo Líquido</td>
                             <td><input type="text" name="txtSueldoLiquido" value="" /></td>
@@ -79,7 +107,7 @@ and open the template in the editor.
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div align="center">
                     <input type="submit" value="Postular" name="btnPostular" />
                 </div>
