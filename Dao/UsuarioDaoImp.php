@@ -111,7 +111,7 @@ class UsuarioDaoImp implements BaseDao {
     public static function login($dto) {
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut= ? AND contrasena = ?");
+            $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut = ? AND contrasena = ?");
             $rut = $dto->getRut();
             $pass = $dto->getContrasena();
             $stmt->bindParam(1, $rut);
@@ -119,7 +119,7 @@ class UsuarioDaoImp implements BaseDao {
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
-                if ($value["rut"] == $rut && $value["contrasena"] == $pass) {
+                if ($value["rut"] === $rut && $value["contrasena"] === $pass) {
                     return true;
                 } else {
                     return false;

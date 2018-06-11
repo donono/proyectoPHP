@@ -4,29 +4,31 @@ include_once '../Dao/UsuarioDaoImp.php';
 include_once '../Dto/UsuarioDto.php';
 
 $rut = $_POST["txtRut"];
-$contraseña = $_POST["txtRut"];
+$contraseña = $_POST["txtContraseña"];
 
+$dao = new UsuarioDaoImp();
 
 $dto = new UsuarioDto();
 $dto->setRut($rut);
 $dto->setContrasena($contraseña);
 
-if (UsuarioDaoImp::validarRut($dto->getRut())) {
-    
-    if (UsuarioDaoImp::login($dto)) {
+if ($dao->validarRut($dto->getRut())) {
+
+    if ($dao->login($dto)) {
+
         session_start();
         $_SESSION["logged"] = $dto;
 
-        header("Location: inicio.php");
-        echo "funciona";
+        include_once 'inicio.php';
     } else {
-        header("Location: login_page.php");
-        echo "no funciona";
-        echo "<script>badLogin();</script>";
+        //    header("Location: login_page.php");
+        include_once 'login_page.php';
+        echo '<script>badLogin();</script>';
     }
 } else {
-    header("Location: login_page.php");
-    echo "<script>badRut();</script>";
+//    header("Location: login_page.php");
+    include_once 'login_page.php';
+    echo '<script>badRut();</script>';
 }
 
 
