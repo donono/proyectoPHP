@@ -12,7 +12,7 @@ class PostulanteDaoImp implements BaseDao {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("INSERT INTO postulante "
                     . "(rut, nombre, ap_paterno, ap_materno, fecha_nacimiento, sexo, telefono, hijos, email, "
-                    . "direccion,enfermedad, sueldo, id_estado, id_renta, id_educacion, id_comuna) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    . "direccion, enfermedad, sueldo, id_estado, id_renta, id_educacion, id_comuna) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             $stmt->bindParam(1, $rut);
             $stmt->bindParam(2, $nombre);

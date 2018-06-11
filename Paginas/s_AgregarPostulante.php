@@ -20,10 +20,10 @@ $dto->setFechaNacimiento($_POST["dateNacimiento"]);
 $dto->setSexo($_POST["radioSexo"]);
 
 // Settear cantidad de hijos si el checkbox está marcado
-if(isset($_POST["checkHijos"])){
+if (isset($_POST["checkHijos"])) {
     $dto->setHijos($_POST["txtHijos"]);
     // Settear en 0 si el checkbox no está marcado
-}else{
+} else {
     $dto->setHijos(0);
 }
 
@@ -32,9 +32,9 @@ $dto->setEmail($_POST["txtEmail"]);
 $dto->setDireccion($_POST["txtDireccion"]);
 
 // Settea enfermedad
-if(isset($_POST["checkEnfermedad"])){
+if (isset($_POST["checkEnfermedad"])) {
     $dto->setEnfermedad(1);
-}else{
+} else {
     $dto->setEnfermedad(0);
 }
 
@@ -47,10 +47,11 @@ $dto->setComuna(ComunaDaoImp::TextToId($_POST["dropComuna"]));
 $solicitud->setEstado(1);
 $solicitud->setRut($_POST["txtRut"]);
 
-if(PostulanteDaoImp::agregar($dto)&& SolicitudDaoImp::AgregarSolicitud($solicitud)){
-    echo "<script> alert('Postulante y Solicitud agregados') </script>";
-}else{
-    echo "<script> alert('No se pudo generar registros') </script>";
+if (PostulanteDaoImp::agregar($dto) && SolicitudDaoImp::AgregarSolicitud($solicitud)) {
+    include_once 'v_AgregarPostulante.php';
+    echo '<script>Success();</script>';
+} else {
+    include_once 'v_AgregarPostulante.php';
+    echo '<script>Error();</script>';
 }
 
-include_once 'v_AgregarPostulante.php';

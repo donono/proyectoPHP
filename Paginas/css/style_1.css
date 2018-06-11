@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-06-2018, 23:28:05
+    Author     : Daniel GS
+*/
+
+body {
+    /* The image used */
+    background-image: url(https://webgradients.com/public/webgradients_png/058%20Great%20Whale.png);
+    opacity: 0.7;
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+div.image {
+    background-image:url(https://webgradients.com/public/webgradients_png/026%20Saint%20Petersburg.png);
+    opacity: 1 !important;
+    border-radius: 5px;
+    width: 75%;
+    height: 580px;
+}
+
+.outer-div
+{
+     padding: 30px;
+}
+.inner-div
+{
+     display: inline-block;
+     padding: 50px;
+}
+
+
+input{
+    opacity: 1 !important;
+}
+
+input:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+}
