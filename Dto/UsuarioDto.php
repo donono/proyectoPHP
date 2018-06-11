@@ -15,6 +15,7 @@ class UsuarioDto {
         $this->ap_materno = "";
         $this->ap_paterno = "";
     }
+    
 
     function getRut() {
         return $this->rut;

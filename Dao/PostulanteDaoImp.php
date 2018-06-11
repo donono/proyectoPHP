@@ -30,7 +30,7 @@ class PostulanteDaoImp implements BaseDao {
             $stmt->bindParam(14, $renta);
             $stmt->bindParam(15, $educacion);
             $stmt->bindParam(16, $comuna);
-            
+
             $rut = $dto->getRut();
             $nombre = $dto->getNombre();
             $ap_paterno = $dto->getAp_paterno();
@@ -47,16 +47,15 @@ class PostulanteDaoImp implements BaseDao {
             $renta = $dto->getRenta();
             $educacion = $dto->getEducacion();
             $comuna = $dto->getComuna();
-           
-            
+
+
             $stmt->execute();
-            
-            if($stmt->rowCount()>0){
+
+            if ($stmt->rowCount() > 0) {
                 return true;
             }
-            
+
             $pdo = null;
-            
         } catch (Exception $ex) {
             echo "No se pudo agregar. Stacktrace: " . $ex->getMessage();
         }
@@ -73,6 +72,46 @@ class PostulanteDaoImp implements BaseDao {
 
     public static function modificar($dto) {
         
+    }
+
+    public static function BuscarPorRut($rut) {
+        $salida = new ArrayObject();
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM postulante WHERE rut = ?");
+            $stmt->bindParam(1, $rut);
+            $stmt->execute();
+
+            $rs = $stmt->fetchAll();
+
+            foreach ($rs as $sol) {
+                if ($sol["rut"] == $rut) {
+                    $dto = new PostulanteDto();
+                    $dto->setRut($sol["rut"]);
+                    $dto->setNombre($sol["nombre"]);
+                    $dto->setAp_paterno($sol["ap_paterno"]);
+                    $dto->setAp_materno($sol["ap_materno"]);
+                    $dto->setFechaNacimiento($sol["fecha_nacimiento"]);
+                    $dto->setSexo($sol["sexo"]);
+                    $dto->setHijos($sol["hijos"]);
+                    $dto->setTelefono($sol["telefono"]);
+                    $dto->setEmail($sol["email"]);
+                    $dto->setDireccion($sol["direccion"]);
+                    $dto->setEnfermedad($sol["enfermedad"]);
+                    $dto->setSueldo($sol["sueldo"]);
+                    $dto->setEstadoCivil($sol["id_estado"]);
+                    $dto->setRenta($sol["id_renta"]);
+                    $dto->setEducacion($sol["id_educacion"]);
+                    $dto->setComuna($sol["id_comuna"]);
+                    $salida->append($dto);
+                } else {
+                    echo "No hay solicitudes con ese rut";
+                }
+            }
+            return $salida;
+        } catch (Exception $ex) {
+            echo "Error al mostrar " . $ex->getMessage();
+        }
     }
 
 }

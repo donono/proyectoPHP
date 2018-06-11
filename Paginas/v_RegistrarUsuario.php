@@ -13,7 +13,6 @@
                     <tr>
                         <td>Rut</td>
                         <td><input type="text" name="txtRut" value="" /></td>
-                        <td><input type="text" name="txtVerificador" value="" style="width: 30px" /></td>
                     </tr>
                     <tr>
                         <td>Nombre</td>
