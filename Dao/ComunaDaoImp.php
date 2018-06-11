@@ -13,7 +13,7 @@ class ComunaDaoImp {
 
             $res = $stmt->fetchAll();
             foreach ($res as $comuna) {
-                $comunas->append($comuna['nombre']);
+                $comunas->append(utf8_encode($comuna['nombre']));
             }
             return $comunas;
         } catch (Exception $ex) {

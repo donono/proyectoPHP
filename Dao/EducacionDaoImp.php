@@ -13,7 +13,7 @@ class EducacionDaoImp {
 
             $res = $stmt->fetchAll();
             foreach ($res as $educacion) {
-                $edu->append($educacion['nombre']);
+                $edu->append(utf8_encode($educacion['nombre']));
             }
             return $edu;
         } catch (Exception $ex) {

@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
 
         <link type="text/css" href="css/style_1.css" rel="stylesheet"/>
@@ -51,14 +45,12 @@ and open the template in the editor.
                     }
                 });
             });
-            
-            function cargarDatos(){
-                
-                
-                document.getElementById('txtRut').value = ;
-                document.getElementById('txtNombre').value = ;
-                document.getElementById('txtPaterno').value = ;
-                document.getElementById('txtMaterno').value = ;
+
+            function cargarDatos() {
+                document.getElementById('txtRut').value = <?php echo '$_session["logged"]'; ?>
+                document.getElementById('txtNombre').value = <?php echo '$_session["logged"]'; ?>
+                document.getElementById('txtPaterno').value = <?php echo '$_session["logged"]'; ?>
+                document.getElementById('txtMaterno').value = <?php echo '$_session["logged"]'; ?>
             }
         </script>
 
@@ -189,7 +181,7 @@ and open the template in the editor.
                                     <input type="text" class="form-control" name="txtSueldoLiquido" id="txtSueldoLiquido" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group col-xs-6">
                                     <div class="form-check">
@@ -207,7 +199,7 @@ and open the template in the editor.
                                     <label class="form-check-label" for="checkEnfermedad">Padece Enfermedades Crónicas</label>
                                 </div> 
                             </div>
-                            
+
                             <div align="center">
                                 <input type="submit" class="btn btn-success" value="Postular" name="btnPostular" />
                             </div>
