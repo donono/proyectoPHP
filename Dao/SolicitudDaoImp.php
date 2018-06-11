@@ -31,7 +31,7 @@ class SolicitudDaoImp {
         $listaSolicitud = new ArrayObject();
         try{
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("SELECT estado FROM solicitud WHERE rut = ?");
+            $stmt = $pdo->prepare("SELECT * FROM solicitud WHERE rut = ?");
             $stmt->bindParam(1, $rut);
             $stmt->execute();
             

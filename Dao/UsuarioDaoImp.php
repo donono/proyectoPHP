@@ -9,11 +9,20 @@ class UsuarioDaoImp implements BaseDao {
 
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("INSERT INTO usuario(rut,contrasena) "
-                    . "values(?,?)");
+            $stmt = $pdo->prepare("INSERT INTO usuario(rut,contrasena, nombre, ap_paterno, ap_materno) "
+                    . "values(?,?,?,?,?)");
+            
+            $stmt->bindParam(1, $rut);
+            $stmt->bindParam(2, $contrasena);
+            $stmt->bindParam(3, $nombre);
+            $stmt->bindParam(4, $ap_paterno);
+            $stmt->bindParam(5, $ap_materno);
 
-            $stmt->bindValue(1, $dto->getRut());
-            $stmt->bindValue(2, $dto->getContrasena());
+            $rut = $dto->getRut();
+            $contrasena = $dto->getContrasena();
+            $nombre = $dto->getNombre();
+            $ap_paterno = $dto->getAp_paterno();
+            $ap_materno = $dto->getAp_materno();
 
             $stmt->execute();
 
