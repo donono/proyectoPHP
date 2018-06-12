@@ -46,15 +46,17 @@
                     <p><?php
                         if (isset($_SESSION["logged"])) {
                             include_once '../Dto/UsuarioDto.php';
-                            $dto = new UsuarioDto();
-                            $dto = $_SESSION["logged"];
-                            echo $dto->getNombre() . ' ' . $dto->getAp_paterno() . ' ' . $dto->getAp_materno();
+                            $logged = new UsuarioDto();
+                            $logged = $_SESSION["logged"];
+                            echo $logged->getNombre() . ' ' . $logged->getAp_paterno() . ' ' . $logged->getAp_materno();
+                        }else{
+                         echo "no se ha iniciado sesión";
                         }
                         ?>
                     </p>
                     <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
                     <li><a href="v_EstadoSolicitud.php">Estado Solicitud</a></li>
-                    <li><a href="v_VerSolicitudes.php">Ver Solicitudes</a></li>
+                    <li><a href="v_MostrarTodas.php">Ver Solicitudes</a></li>
                 </ul>
             </nav>
 
@@ -79,11 +81,12 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
-                <br>  
                 <div class="container image">
                     <div class="container pt-5">
+                        <br><br>
                         <div class="col-8">
                             <div class=" col-12 pt-5">
+
                                 <form action="s_AgregarPostulante.php" method="POST">
                                     <div class="form-row">
                                         <div class="form-group col-sm-4">
@@ -221,9 +224,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">                                        
-                                        <div class="form-group col-sm-8">
-                                            <input type="submit" class="btn btn-success" value="Postular" name="btnPostular" />
-                                        </div> 
+                                            <input type="submit" class="btn btn-success btn-sm btn-block" value="Postular" name="btnPostular" />
                                     </div>
                                 </form>
                             </div>
@@ -290,7 +291,7 @@
                     button: "Cerrar"
                 });
             }
-            
+
         </script>
     </body>
 </html>
