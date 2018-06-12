@@ -43,7 +43,7 @@
                             $dto = new PostulanteDto();
                             $dto = $_SESSION["salida"];
                             ?>
-                        <a href="v_MostrarTodas.php"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
+                            <a href="v_MostrarTodas.php"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
                             <table class="table">
                                 <thead class="thead-dark">
                                 <h1 align="center">Ficha Postulante</h1>
