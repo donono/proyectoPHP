@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
 
+        <link type="text/css" rel="stylesheet" href="css/style_1.css"/>
         <!-- font Awesome -->
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
 
@@ -136,13 +137,10 @@
                     <!-- aqui va el contenido de la página -->
                     <br><br><br>  
                     <div class="container image">
-                        <div class="container pt-2 inner-div">
+                        <div class="container pt-2">
                             <div class="col-12">
                                 <div class="container col-10 pt-5">
-
-
                                     <form action="s_AgregarPostulante.php" method="POST">
-
                                         <div class="form-row">
                                             <div class="form-group col-xs-6">
                                                 <label for="txtRut">Rut</label>
@@ -282,8 +280,6 @@
                                         </div>
                                 </div>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
@@ -321,8 +317,4 @@
         });
         </script>
     </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
 </html>
