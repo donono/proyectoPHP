@@ -17,7 +17,7 @@ if ($dao->validarRut($dto->getRut())) {
     if ($dao->login($dto)) {
 
         session_start();
-        $_SESSION["logged"] = $dto;
+        $_SESSION["logged"] = $dao->getUsuario($rut);
 
         include_once 'inicio.php';
     } else {
