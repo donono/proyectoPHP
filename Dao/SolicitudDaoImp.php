@@ -85,6 +85,7 @@ class SolicitudDaoImp {
                     $texto = "Reprobada";
                 }
             }
+            
             return $texto;
                     
         } catch (Exception $ex) {

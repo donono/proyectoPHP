@@ -9,7 +9,7 @@ $solicitud = new SolicitudDaoImp();
 $rut = $_POST["rutEliminar"];
 
 if($postulante->eliminar($rut) && $solicitud->Eliminar($rut)){
-    echo "<script> alert('Registros eliminados con éxito') </script>";
+    echo "<script> alert('Registro eliminado con éxito') </script>";
 }else{
     echo "<script> alert('No se ha podido eliminar') </script>";
 }

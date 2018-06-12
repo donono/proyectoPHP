@@ -76,6 +76,7 @@ class PostulanteDaoImp implements BaseDao {
         } catch (Exception $ex) {
             echo "No se pudo eliminar ". $ex->getMessage();
         }
+        
         return false;
         
     }
