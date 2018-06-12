@@ -1,17 +1,17 @@
 <?php
 
-
 class SolicitudDto {
+
     private $id;
     private $estado;
     private $rut;
-    
+
     function __construct() {
         $this->id = "";
         $this->estado = "";
         $this->rut = "";
     }
-    
+
     function getId() {
         return $this->id;
     }
@@ -27,7 +27,7 @@ class SolicitudDto {
     function setEstado($estado) {
         $this->estado = $estado;
     }
-    
+
     function getRut() {
         return $this->rut;
     }
@@ -35,9 +35,5 @@ class SolicitudDto {
     function setRut($rut) {
         $this->rut = $rut;
     }
-
-
-
-
 
 }

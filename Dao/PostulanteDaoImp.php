@@ -62,7 +62,21 @@ class PostulanteDaoImp implements BaseDao {
         return false;
     }
 
-    public static function eliminar($key) {
+    public static function eliminar($rut) {
+        try{
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("DELETE FROM postulante WHERE rut=?");
+            $stmt->bindParam(1, $rut);
+            $stmt->execute();
+            
+            if($stmt->rowCount()>0){
+                return true;
+            }
+            $pdo = null;
+        } catch (Exception $ex) {
+            echo "No se pudo eliminar ". $ex->getMessage();
+        }
+        return false;
         
     }
 

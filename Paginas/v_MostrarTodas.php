@@ -30,8 +30,15 @@ and open the template in the editor.
                 <tr>
                     <td> <?php echo $postulante->getRut(); ?> </td>
                     <td> <?php echo $postulante->getNombre() . " " . $postulante->getAp_paterno(); ?></td>
-                    <?php $estado = SolicitudDaoImp::MostrarEstado($postulante->getRut()); ?>
-                    <td> <?php $estado; ?> </td>
+                    <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
+                    <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
+                    <td> <?php echo $texto ?> </td>
+                    <td>
+                        <form action="s_Eliminar.php" method="POST">
+                            <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut();?>" >
+                            <input type="submit" value="Eliminar" name="btnEliminar">
+                        </form>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>
