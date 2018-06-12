@@ -19,13 +19,13 @@ if ($dao->validarRut($dto->getRut())) {
         session_start();
         $_SESSION["logged"] = $dao->getUsuario($rut);
 
-        header("Location: v_inicio.php");
+        include_once 'v_inicio.php';
     } else {
-        header("Location: v_login.php");
+        include_once 'v_login.php';
         echo '<script>badLogin();</script>';
     }
 } else {
-    header("Location: v_login.php");
+        include_once 'v_login.php';
     echo '<script>badRut();</script>';
 }
 

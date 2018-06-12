@@ -2,6 +2,7 @@
 
 include_once 'BaseDao.php';
 include_once '../Sql/ClasePdo.php';
+include_once '../Dto/UsuarioDto.php';
 
 class UsuarioDaoImp implements BaseDao {
 
@@ -11,7 +12,7 @@ class UsuarioDaoImp implements BaseDao {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("INSERT INTO usuario(rut,contrasena, nombre, ap_paterno, ap_materno) "
                     . "values(?,?,?,?,?)");
-            
+
             $stmt->bindParam(1, $rut);
             $stmt->bindParam(2, $contrasena);
             $stmt->bindParam(3, $nombre);
@@ -140,4 +141,28 @@ class UsuarioDaoImp implements BaseDao {
         }
     }
 
+    public static function getUsuario($key) {
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut = ?");
+            $stmt->bindParam(1, $key);
+            $stmt->execute();
+            
+            $resultado = $stmt->fetchAll();
+            
+            foreach ($resultado as $value) {
+                $dto = new UsuarioDto();
+                $dto->setRut($value["rut"]);
+                $dto->setContrasena($value["contrasena"]);
+                $dto->setNombre($value["nombre"]);
+                $dto->setAp_paterno($value["ap_paterno"]);
+                $dto->setAp_materno($value["ap_materno"]);
+                return $dto;
+            }
+            $pdo = null;
+        } catch (Exception $ex) {
+            throw new Exception("Error al retornar un usuario. Trace: " . $ex->getTraceAsString());
+        }
+        return null;
+    }
 }

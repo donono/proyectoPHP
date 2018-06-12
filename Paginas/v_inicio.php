@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
 
+        <link type="text/css" rel="stylesheet" href="css/style_1.css"/>
         <!-- font Awesome -->
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
 
@@ -23,6 +24,10 @@
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
+
+        <script type="text/javascript">
+
+        </script>
     </head>
     <body>
 
@@ -34,10 +39,10 @@
                 </div>
 
                 <div class="sidebar-header">
-                    <h3>DAICREDIT</h3>
+                    <a href="v_inicio.php"><h3>DAICREDIT</h3></a>
                 </div>
 
-                <ul class="list-unstyled components">
+                <ul class="list-unstycled components">
                     <p><?php
                         if (isset($_SESSION["logged"])) {
                             include_once '../Dto/UsuarioDto.php';
@@ -47,16 +52,15 @@
                         }
                         ?>
                     </p>
-                    <li class="active">
                     <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
                     <li><a href="v_EstadoSolicitud.php">Estado Solicitud</a></li>
                     <li><a href="v_VerSolicitudes.php">Ver Solicitudes</a></li>
                 </ul>
             </nav>
 
-            <!-- Page Content Holder -->
-            <div id="">
+            <div id="content">
 
+                <!-- barra con boton para desplegar menu y cerrar sesión-->
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
 
@@ -75,10 +79,9 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
+
             </div>
         </div>
-
-
 
         <div class="overlay"></div>
 
@@ -108,6 +111,36 @@
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
             });
+
+            $(function () {
+                $("#checkHijos").click(function () {
+                    if ($(this).is(":checked")) {
+                        $("#txtHijos").removeAttr("disabled");
+                        $("#txtHijos").focus();
+                    } else {
+                        $("#txtHijos").attr("disabled", "disabled");
+                    }
+                });
+            });
+
+            function Error() {
+                swal({
+                    title: "Error!",
+                    text: "Error al enviar solicitud!",
+                    icon: "error",
+                    button: "Cerrar"
+                });
+            }
+
+            function Success() {
+                swal({
+                    title: "Exito",
+                    text: "Solicitud enviada!",
+                    icon: "success",
+                    button: "Cerrar"
+                });
+            }
+
         </script>
     </body>
 </html>

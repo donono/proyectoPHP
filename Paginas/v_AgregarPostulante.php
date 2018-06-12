@@ -26,42 +26,7 @@
 
 
         <script type="text/javascript">
-            function Error() {
-                swal({
-                    title: "Error!",
-                    text: "Usuario o contraseña incorrecta!",
-                    icon: "error",
-                    button: "Cerrar"
-                });
-            }
-            function Success() {
-                swal({
-                    title: "Exito",
-                    text: "Solicitud enviada ",
-                    icon: "success",
-                    button: "Cerrar"
-                });
-            }
-            $(function () {
-                $("#checkHijos").click(function () {
-                    if ($(this).is(":checked")) {
-                        $("#txtHijos").removeAttr("disabled");
-                        $("#txtHijos").focus();
-                    } else {
-                        $("#txtHijos").attr("disabled", "disabled");
-                    }
-                });
-            });
 
-            function cargarDatos() {
-<?php include_once '../Dto/UsuarioDto.php'; ?>
-<?php $user = $_SESSION['logged'] ?>
-                var user = $user;
-                document.getElementById('txtRut').value = user.rut;
-                document.getElementById('txtNombre').value = user.nombre;
-                document.getElementById('txtPaterno').value = user.ap_paterno;
-                document.getElementById('txtMaterno').value = user.ap_materno;
-            }
         </script>
     </head>
     <body>
@@ -74,7 +39,7 @@
                 </div>
 
                 <div class="sidebar-header">
-                    <h3>DAICREDIT</h3>
+                    <h3><a href="v_inicio.php">DAICREDIT</h3>
                 </div>
 
                 <ul class="list-unstyled components">
@@ -87,7 +52,6 @@
                         }
                         ?>
                     </p>
-                    <li class="active">
                     <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
                     <li><a href="v_EstadoSolicitud.php">Estado Solicitud</a></li>
                     <li><a href="v_VerSolicitudes.php">Ver Solicitudes</a></li>
@@ -115,170 +79,152 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
-                <div id="content">
+                <br>  
+                <div class="container image">
+                    <div class="container pt-5">
+                        <div class="col-8">
+                            <div class=" col-12 pt-5">
+                                <form action="s_AgregarPostulante.php" method="POST">
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtRut">Rut</label>
+                                            <input type="text" class="form-control" name="txtRut" id="txtRut" required>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtTelefono">Telefono</label>
+                                            <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtEmail">Email</label>
+                                            <input type="email" class="form-control" name="txtEmail" id="txtEmail" required>
+                                        </div>
+                                    </div>
 
-                    <nav class="navbar navbar-default">
-                        <div class="container-fluid">
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtNombre">Nombre</label>
+                                            <input type="text" class="form-control" name="txtNombre" id="txtNombre" required>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtPaterno">Apellido Paterno</label>
+                                            <input type="text" class="form-control" name="txtPaterno" id="txtPaterno" required>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtMaterno">Apellido Materno</label>
+                                            <input type="text" class="form-control" name="txtMaterno" id="txtMaterno" required>
+                                        </div>
+                                    </div>
 
-                            <div class="navbar-header">
-                                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                    <i class="glyphicon glyphicon-align-left"></i>
-                                    <span>Abrir Menú</span>
-                                </button>
-                            </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtDireccion">Direccion</label>
+                                            <input type="text" class="form-control" name="txtDireccion" id="txtDireccion" required>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="dropComuna">Comuna</label>
+                                            <select class="form-control" name="dropComuna" id="dropComuna">
+                                                <option value="" disabled="" selected="true">Seleccionar...</option>
+                                                <?php
+                                                include_once '../Dao/ComunaDaoImp.php';
+                                                $opcion = ComunaDaoImp::ListarTodas();
+                                                foreach ($opcion as $value) {
+                                                    echo "<option> $value </option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="s_logout.php" class="article">Cerrar Sesión</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-                    <!-- aqui va el contenido de la página -->
-                    <br><br><br>  
-                    <div class="container image">
-                        <div class="container pt-2">
-                            <div class="col-12">
-                                <div class="container col-10 pt-5">
-                                    <form action="s_AgregarPostulante.php" method="POST">
-                                        <div class="form-row">
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtRut">Rut</label>
-                                                <input type="text" class="form-control" name="txtRut" id="txtRut" required>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="dateNacimiento">Fecha Nacimiento</label>
+                                            <input type="date" class="form-control" name="dateNacimiento" id="dateNacimiento" required>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="dropEstadoCivil">Estado Civil</label>
+                                            <select class="form-control" name="dropEstadoCivil">
+                                                <option value="" disabled="" selected="true">Seleccionar...</option>
+                                                <?php
+                                                include_once '../Dao/EstadoCivilDaoImp.php';
+                                                $opcion = EstadoCivilDaoImp::Listar();
+                                                foreach ($opcion as $value) {
+                                                    echo "<option> $value </option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group pl-2">
+                                            <label class="form-row">Sexo</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="radioSexo" id="radioSexo" value="M">
+                                                <label class="form-check-label" for="inlineRadio1">Masculino</label>
                                             </div>
-
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtTelefono">Telefono</label>
-                                                <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required>
-                                            </div>
-
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtEmail">Email</label>
-                                                <input type="email" class="form-control" name="txtEmail" id="txtEmail" required>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="radioSexo" id="radioSexo" value="F">
+                                                <label class="form-check-label" for="inlineRadio2">Femenino</label>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-row">
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtNombre">Nombre</label>
-                                                <input type="text" class="form-control" name="txtNombre" id="txtNombre" required>
-                                            </div>
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtPaterno">Apellido Paterno</label>
-                                                <input type="text" class="form-control" name="txtPaterno" id="txtPaterno" required>
-                                            </div>
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtMaterno">Apellido Materno</label>
-                                                <input type="text" class="form-control" name="txtMaterno" id="txtMaterno" required>
-                                            </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label for="dropEducacion">Educación</label>
+                                            <select class="form-control" name="dropEducacion">
+                                                <option value="" disabled="" selected="true">Seleccionar...</option>
+                                                <?php
+                                                include_once '../Dao/EducacionDaoImp.php';
+                                                $opcion = EducacionDaoImp::Listar();
+                                                foreach ($opcion as $value) {
+                                                    echo "<option> $value </option>";
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtDireccion">Direccion</label>
-                                                <input type="text" class="form-control" name="txtDireccion" id="txtDireccion" required>
-                                            </div>
-                                            <div class="form-group col-xs-6">
-                                                <label for="dropComuna">Comuna</label>
-                                                <select class="form-control" name="dropComuna" id="dropComuna">
-                                                    <option value="" disabled="" selected="true">Seleccionar...</option>
-                                                    <?php
-                                                    include_once '../Dao/ComunaDaoImp.php';
-                                                    $opcion = ComunaDaoImp::ListarTodas();
-                                                    foreach ($opcion as $value) {
-                                                        echo "<option> $value </option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="dropRenta">Renta</label>
+                                            <select class="form-control" name="dropRenta">
+                                                <option value="" disabled="" selected="true">Seleccionar...</option>
+                                                <?php
+                                                include_once '../Dao/RentaDaoImp.php';
+                                                $opcion = RentaDaoImp::Listar();
+                                                foreach ($opcion as $value) {
+                                                    echo "<option> $value </option>";
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-xs-6">
-                                                <label for="dateNacimiento">Fecha Nacimiento</label>
-                                                <input type="date" class="form-control" name="dateNacimiento" id="dateNacimiento" required>
-                                            </div>
-                                            <div class="form-group col-xs-6">
-                                                <label for="dropEstadoCivil">Estado Civil</label>
-                                                <select class="form-control" name="dropEstadoCivil">
-                                                    <option value="" disabled="" selected="true">Seleccionar...</option>
-                                                    <?php
-                                                    include_once '../Dao/EstadoCivilDaoImp.php';
-                                                    $opcion = EstadoCivilDaoImp::Listar();
-                                                    foreach ($opcion as $value) {
-                                                        echo "<option> $value </option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group pl-2">
-                                                <label class="form-row">Sexo</label>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radioSexo" id="radioSexo" value="M">
-                                                    <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="radioSexo" id="radioSexo" value="F">
-                                                    <label class="form-check-label" for="inlineRadio2">Femenino</label>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="txtSueldoLiquido">Sueldo Líquido</label>
+                                            <input type="text" class="form-control" name="txtSueldoLiquido" id="txtSueldoLiquido" required>
                                         </div>
+                                    </div>
 
-                                        <div class="form-row">
-                                            <div class="form-group col-xs-6">
-                                                <label for="dropEducacion">Educación</label>
-                                                <select class="form-control" name="dropEducacion">
-                                                    <option value="" disabled="" selected="true">Seleccionar...</option>
-                                                    <?php
-                                                    include_once '../Dao/EducacionDaoImp.php';
-                                                    $opcion = EducacionDaoImp::Listar();
-                                                    foreach ($opcion as $value) {
-                                                        echo "<option> $value </option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-xs-6">
-                                                <label for="dropRenta">Renta</label>
-                                                <select class="form-control" name="dropRenta">
-                                                    <option value="" disabled="" selected="true">Seleccionar...</option>
-                                                    <?php
-                                                    include_once '../Dao/RentaDaoImp.php';
-                                                    $opcion = RentaDaoImp::Listar();
-                                                    foreach ($opcion as $value) {
-                                                        echo "<option> $value </option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-xs-6">
-                                                <label for="txtSueldoLiquido">Sueldo Líquido</label>
-                                                <input type="text" class="form-control" name="txtSueldoLiquido" id="txtSueldoLiquido" required>
-                                            </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="ON" id="checkHijos" name="checkHijos">
+                                                <label class="form-check-label" for="checkHijos">Hijos</label>
+                                            </div> 
                                         </div>
+                                        <div class="float-left col-sm-4">Cantidad</div>
+                                        <div class="float-right col-sm-4 pl-2">
+                                            <input disabled="disabled" class="form-control" type="text" id="txtHijos" name="txtHijos" />
+                                        </div>
+                                    </div>
 
-                                        <div class="form-row">
-                                            <div class="form-group col-xs-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="ON" id="checkHijos" name="checkHijos">
-                                                    <label class="form-check-label" for="checkHijos">Hijos</label>
-                                                </div> 
-                                            </div>
-
-                                            <div class="float-left pl-2">Cantidad</div>
-                                            <div class="float-right pl-2 col-2">
-                                                <input disabled="disabled" class="form-control" type="text" id="txtHijos" name="txtHijos" />
-                                            </div>
-                                            <div class="form-check pl-5">
+                                    <div class="form-row">                                        
+                                        <div class="form-group col-sm-4">
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="ON" id="checkEnfermedad" value="ON">
                                                 <label class="form-check-label" for="checkEnfermedad">Padece Enfermedades Crónicas</label>
                                             </div> 
                                         </div>
-
-                                        <div align="center">
+                                    </div>
+                                    <div class="form-row">                                        
+                                        <div class="form-group col-sm-8">
                                             <input type="submit" class="btn btn-success" value="Postular" name="btnPostular" />
-                                        </div>
-                                </div>
+                                        </div> 
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -298,23 +244,53 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
         <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').addClass('active');
+                    $('.overlay').fadeIn();
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
             });
 
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').fadeOut();
+            $(function () {
+                $("#checkHijos").click(function () {
+                    if ($(this).is(":checked")) {
+                        $("#txtHijos").removeAttr("disabled");
+                        $("#txtHijos").focus();
+                    } else {
+                        $("#txtHijos").attr("disabled", "disabled");
+                    }
+                });
             });
 
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').fadeIn();
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
+            function Error() {
+                swal({
+                    title: "Error!",
+                    text: "Error al enviar solicitud!",
+                    icon: "error",
+                    button: "Cerrar"
+                });
+            }
+
+            function Success() {
+                swal({
+                    title: "Exito",
+                    text: "Solicitud enviada!",
+                    icon: "success",
+                    button: "Cerrar"
+                });
+            }
+            
         </script>
     </body>
 </html>
