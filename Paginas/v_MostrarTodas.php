@@ -36,7 +36,7 @@ and open the template in the editor.
                     <td>
                         <form action="s_Eliminar.php" method="POST">
                             <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut();?>" >
-                            <input type="submit" value="Eliminar" name="btnEliminar">
+                            <input type="submit" value="El" name="btnEliminar">
                         </form>
                     </td>
                 </tr>
