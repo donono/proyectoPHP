@@ -33,12 +33,26 @@ and open the template in the editor.
                     <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
                     <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
                     <td> <?php echo $texto ?> </td>
+                    
                     <td>
                         <form action="s_Eliminar.php" method="POST">
-                            <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut();?>" >
+                            <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut(); ?>" >
                             <input type="submit" value="Eliminar" name="btnEliminar">
                         </form>
                     </td>
+                    <td>
+                        <form action="s_MostrarPorRut.php" method="POST">
+                            <input type ="hidden" name="rutMostrar" value="<?php echo $postulante->getRut(); ?>" >
+                            <input type="submit" value="Mostrar" name="btnVer">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="s_ModificarSolicitud.php" method="POST">
+                            <input type ="hidden" name="rutModificar" value="<?php echo $postulante->getRut(); ?>" >
+                            <input type="submit" value="Modificar" name="btnModificar">
+                        </form>
+                    </td>
+                    
                 </tr>
             <?php } ?>
         </tbody>
