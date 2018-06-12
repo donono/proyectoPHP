@@ -67,6 +67,26 @@ class PostulanteDaoImp implements BaseDao {
     }
 
     public static function listarTodos() {
+        $postulantes = new ArrayObject();
+        try{
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT rut, nombre, ap_paterno FROM postulante");
+            $stmt->execute();
+            
+            $rs = $stmt->fetchAll();
+            
+            foreach ($rs as $sol) {
+                $dto = new PostulanteDto();
+                $dto->setRut($sol["rut"]);
+                $dto->setNombre($sol["nombre"]);
+                $dto->setAp_paterno($sol["ap_paterno"]);
+                $postulantes->append($dto);
+            }
+            return $postulantes;
+            
+        } catch (Exception $ex) {
+            echo "Error al listar ".$ex->getMessage();
+        }
         
     }
 

@@ -27,7 +27,7 @@
         include_once '../Dao/EducacionDaoImp.php';
         include_once '../Dao/EstadoCivilDaoImp.php';
         include_once '../Dao/RentaDaoImp.php';
-        if (isset($_SESSION["salida"])) {
+        if (isset($_SESSION["salida"])) {   
             ?>
             <div class="col-8">
                 <table class="table table-striped" id="tablaSalida" border="0">
@@ -78,11 +78,5 @@
                 </table>
             </div>
         <?php } ?>
-
-
-
-
-
-
     </body>
 </html>

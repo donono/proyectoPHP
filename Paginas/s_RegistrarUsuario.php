@@ -17,4 +17,3 @@ if(UsuarioDaoImp::agregar($dto)){
 }
 
 include_once 'v_RegistrarUsuario.php';
-        
