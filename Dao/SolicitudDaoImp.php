@@ -109,5 +109,43 @@ class SolicitudDaoImp {
         }   
         return false;
     }
+    
+    public static function ListarPorRut($rut){
+        $dto = new SolicitudDto();
+        try{
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM solicitud WHERE rut = ?");
+            $stmt->bindParam(1, $rut);
+            $stmt->execute();
+            
+            $rs = $stmt->fetchAll();
+            
+            foreach ($rs as $value) {
+                $dto = new SolicitudDto();
+                $dto->setRut($value["rut"]);
+                $dto->setEstado($value["estado"]);
+                return $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error al listar " . $ex->getMessage();
+        }
+    }
+    
+    public static function Modificar($dto){
+        try{
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("UPDATE solicitud SET estado = ? WHERE rut=?");
+            $stmt->bindValue(1, $dto->getEstado());
+            $stmt->bindValue(2, $dto->getRut());
+            $stmt->execute();
+            
+            if($stmt->rowCount()>0){
+                return true;
+            }
+            $pdo = null;
+        } catch (Exception $ex) {
+            echo "Error al modificar ".$ex->getMessage();
+        }
+    }
 
 }

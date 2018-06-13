@@ -5,6 +5,7 @@ include_once '../Dto/SolicitudDto.php';
 $dto = new SolicitudDto();
 
 $dto->setEstado($_POST["radioEstado"]);
+$dto->setRut($_POST["rutModificar"]);
 
 if(SolicitudDaoImp::Modificar($dto)){
     echo "<script> alert('Registro modificado') </script>";
