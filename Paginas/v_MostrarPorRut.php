@@ -29,86 +29,82 @@
 
         <div class="container image">
             <div class="container pt-5">
-                <div class="col-8">
-                    <div class=" col-12 pt-5">
-                        <br><br>
-                        <?php
-                        include_once '../Dto/PostulanteDto.php';
-                        include_once '../Dao/PostulanteDaoImp.php';
-                        include_once '../Dao/ComunaDaoImp.php';
-                        include_once '../Dao/EducacionDaoImp.php';
-                        include_once '../Dao/EstadoCivilDaoImp.php';
-                        include_once '../Dao/RentaDaoImp.php';
-                        if (isset($_SESSION["salida"])) {
-                            $dto = new PostulanteDto();
-                            $dto = $_SESSION["salida"];
-                            ?>
-                            <a href="v_MostrarTodas.php"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
-                            <table class="table">
-                                <thead class="thead-dark">
-                                <h1 align="center">Ficha Postulante</h1>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td align="center"><p><strong>Rut: <?php echo $dto->getRut(); ?></strong></p></td>
-                                        <td align="center"><p><strong>Teléfono: <?php echo $dto->getTelefono(); ?></strong></p></td>
-                                    </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Nombre: <?php echo $dto->getNombre(); ?></strong></p></td>
-                                        <td align="center"><p><strong>Email: <?php echo $dto->getEmail(); ?></strong></p></td>
-                                    </tr>
+                <br><br>
+                <?php
+                include_once '../Dto/PostulanteDto.php';
+                include_once '../Dao/PostulanteDaoImp.php';
+                include_once '../Dao/ComunaDaoImp.php';
+                include_once '../Dao/EducacionDaoImp.php';
+                include_once '../Dao/EstadoCivilDaoImp.php';
+                include_once '../Dao/RentaDaoImp.php';
+                if (isset($_SESSION["salida"])) {
+                    $dto = new PostulanteDto();
+                    $dto = $_SESSION["salida"];
+                    ?>
+                    <a href="v_MostrarTodas.php"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <h2 align="center">Ficha Postulante</h2>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center"><p><strong>Rut: <?php echo $dto->getRut(); ?></strong></p></td>
+                                <td align="center"><p><strong>Teléfono: <?php echo $dto->getTelefono(); ?></strong></p></td>
+                            </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Apellido Paterno: <?php echo $dto->getAp_paterno(); ?></strong></p></td>
-                                        <td align="center"><p><strong>Dirección: <?php echo $dto->getDireccion(); ?></strong></p></td>
-                                    </tr>
+                            <tr>
+                                <td align="center"><p><strong>Nombre: <?php echo $dto->getNombre(); ?></strong></p></td>
+                                <td align="center"><p><strong>Email: <?php echo $dto->getEmail(); ?></strong></p></td>
+                            </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Apellido Materno: <?php echo $dto->getAp_materno(); ?></strong></p></td>
-                                        <td align="center"><p><strong>Comuna: <?php echo ComunaDaoImp::IdToText($dto->getComuna()); ?></strong></p></td>
-                                    </tr>
+                            <tr>
+                                <td align="center"><p><strong>Apellido Paterno: <?php echo $dto->getAp_paterno(); ?></strong></p></td>
+                                <td align="center"><p><strong>Dirección: <?php echo $dto->getDireccion(); ?></strong></p></td>
+                            </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Fecha Nacimiento: <?php echo $dto->getFechaNacimiento(); ?></strong></p></td>
-                                        <td align="center"><p><strong>Educación: <?php echo EducacionDaoImp::IdToText($dto->getEducacion()); ?></strong></p></td>
-                                    </tr>
+                            <tr>
+                                <td align="center"><p><strong>Apellido Materno: <?php echo $dto->getAp_materno(); ?></strong></p></td>
+                                <td align="center"><p><strong>Comuna: <?php echo ComunaDaoImp::IdToText($dto->getComuna()); ?></strong></p></td>
+                            </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Sexo: <?php echo $dto->getSexo(); ?></strong></p></td>
-                                        <td align="center"><p><strong>Renta: <?php echo RentaDaoImp::IdToText($dto->getRenta()); ?></strong></p></td>
-                                    </tr>
+                            <tr>
+                                <td align="center"><p><strong>Fecha Nacimiento: <?php echo $dto->getFechaNacimiento(); ?></strong></p></td>
+                                <td align="center"><p><strong>Educación: <?php echo EducacionDaoImp::IdToText($dto->getEducacion()); ?></strong></p></td>
+                            </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Estado Civil: <?php echo EstadoCivilDaoImp::IdToText($dto->getEstadoCivil()); ?></strong></p></td>
-                                        <td align="center"><p><strong>Sueldo Líquido: <?php echo $dto->getSueldo(); ?></strong></p></td>
-                                    </tr>
+                            <tr>
+                                <td align="center"><p><strong>Sexo: <?php echo $dto->getSexo(); ?></strong></p></td>
+                                <td align="center"><p><strong>Renta: <?php echo RentaDaoImp::IdToText($dto->getRenta()); ?></strong></p></td>
+                            </tr>
 
-                                    <tr>
-                                        <td align="center"><p><strong>Hijos: <?php
-                                                    if ($dto->getHijos() == 0) {
-                                                        echo "NO";
-                                                    } else {
-                                                        echo $dto->getHijos();
-                                                    }
-                                                    ?>
-                                                </strong></p></td>
-                                        <td align="center"><p><strong>Padece alguna enfermedad cronica: <?php
-                                                    if ($dto->getEnfermedad() == 1) {
-                                                        echo "si";
-                                                    } else {
-                                                        echo "no";
-                                                    }
-                                                    ?>
-                                                </strong></p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        <?php } ?>
-                    </div>
-                </div>
+                            <tr>
+                                <td align="center"><p><strong>Estado Civil: <?php echo EstadoCivilDaoImp::IdToText($dto->getEstadoCivil()); ?></strong></p></td>
+                                <td align="center"><p><strong>Sueldo Líquido: <?php echo $dto->getSueldo(); ?></strong></p></td>
+                            </tr>
+
+                            <tr>
+                                <td align="center"><p><strong>Hijos: <?php
+                                            if ($dto->getHijos() == 0) {
+                                                echo "NO";
+                                            } else {
+                                                echo $dto->getHijos();
+                                            }
+                                            ?>
+                                        </strong></p></td>
+                                <td align="center"><p><strong>Padece alguna enfermedad cronica: <?php
+                                            if ($dto->getEnfermedad() == 1) {
+                                                echo "si";
+                                            } else {
+                                                echo "no";
+                                            }
+                                            ?>
+                                        </strong></p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php } ?>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

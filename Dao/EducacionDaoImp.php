@@ -49,7 +49,7 @@ class EducacionDaoImp {
             $rs = $stmt->fetchAll();
             
             foreach ($rs as $edu) {
-                return $edu['nombre'];
+                return utf8_encode($edu['nombre']);
             }
         } catch (Exception $ex) {
             echo "Error al convertir ".$ex->getMessage();

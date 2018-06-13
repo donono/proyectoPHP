@@ -20,7 +20,6 @@ and open the template in the editor.
         include_once '../Dao/EducacionDaoImp.php';
         include_once '../Dao/EstadoCivilDaoImp.php';
         include_once '../Dao/RentaDaoImp.php';
-
         if (isset($_SESSION["salida"])) {
             $dto = new PostulanteDto();
             $solicitud = new SolicitudDto();

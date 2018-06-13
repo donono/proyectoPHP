@@ -35,10 +35,10 @@
                 </div>
 
                 <div class="sidebar-header">
-                    <h3><a href="v_inicio.php">DAICREDIT</h3>
+                    <a href="v_inicio.php"><h3>DAICREDIT</h3></a>
                 </div>
 
-                <ul class="list-unstyled components">
+                <ul class="list-unstycled components">
                     <p><?php
                         if (isset($_SESSION["logged"])) {
                             include_once '../Dto/UsuarioDto.php';
@@ -94,101 +94,98 @@
                 <!-- aqui va el contenido de la página -->
                 <div class="container image">
                     <div class="container pt-5">
-                        <div class="col-8">
-                            <div class=" col-12 pt-5">
-                                <br><br>
-                                <?php
-                                include_once '../Dto/PostulanteDto.php';
-                                include_once '../Dao/PostulanteDaoImp.php';
-                                include_once '../Dao/SolicitudDaoImp.php';
-                                $listaPostulantes = PostulanteDaoImp::listarTodos();
-                                ?>
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                    <th>Rut</th>
-                                    <th>Nombre</th>
-                                    <th>Estado</th>
-                                    <th>Acción</th>
-                                    </thead>
-                                    <tbody>
+                        <br><br>
+                        <?php
+                        include_once '../Dto/PostulanteDto.php';
+                        include_once '../Dao/PostulanteDaoImp.php';
+                        include_once '../Dao/SolicitudDaoImp.php';
+                        $listaPostulantes = PostulanteDaoImp::listarTodos();
+                        ?>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                            </thead>
+                            <tbody>
 
-                                        <?php foreach ($listaPostulantes as $postulante) { ?>
+                                <?php foreach ($listaPostulantes as $postulante) { ?>
 
-                                            <tr >
-                                                <td> <?php echo $postulante->getRut(); ?> </td>
-                                                <td> <?php echo $postulante->getNombre() . " " . $postulante->getAp_paterno(); ?></td>
-                                                <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
-                                                <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
-                                                <td> <?php echo $texto ?> </td>
+                                    <tr >
+                                        <td> <?php echo $postulante->getRut(); ?> </td>
+                                        <td> <?php echo $postulante->getNombre() . " " . $postulante->getAp_paterno(); ?></td>
+                                        <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
+                                        <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
+                                        <td> <?php echo $texto ?> </td>
 
-                                                <td align="center">
-                                                    <form action="s_Eliminar.php" method="POST">
-                                                        <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut(); ?>"/>
-                                                        <button type="submit" class="btn btn-danger" value="" name="btnEliminar"><i class="fas fa-times"></i></button>
-                                                    </form>
-                                                </td>
-                                                <td align="center">
-                                                    <form action="s_MostrarPorRut.php" method="POST">
-                                                        <input type ="hidden" name="rutMostrar" value="<?php echo $postulante->getRut(); ?>"/>
-                                                        <button type="submit" class="btn btn-info" value="Mostrar" name="btnVer"><i class="fas fa-external-link-square-alt"></i></button>
-                                                    </form>
-                                                </td>
-                                                <td align="center">
-                                                    <form action="s_SeleccionarModificar.php" method="POST">
-                                                        <input type ="hidden" name="rutModificar" value="<?php echo $postulante->getRut(); ?>"/>
-                                                        <button type="submit" class="btn btn-primary" value="" name="btnModificar"><i class="fas fa-pencil-alt"></i></button>
-                                                    </form>
-                                                </td>
+                                        <td align="center">
+                                            <form action="s_Eliminar.php" method="POST">
+                                                <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut(); ?>"/>
+                                                <button type="submit" class="btn btn-danger" value="" name="btnEliminar"><i class="fas fa-times"></i></button>
+                                            </form>
+                                        </td>
+                                        <td align="center">
+                                            <form action="s_MostrarPorRut.php" method="POST">
+                                                <input type ="hidden" name="rutMostrar" value="<?php echo $postulante->getRut(); ?>"/>
+                                                <button type="submit" class="btn btn-info" value="Mostrar" name="btnVer"><i class="fas fa-external-link-square-alt"></i></button>
+                                            </form>
+                                        </td>
+                                        <td align="center">
+                                            <form action="s_SeleccionarModificar.php" method="POST">
+                                                <input type ="hidden" name="rutModificar" value="<?php echo $postulante->getRut(); ?>"/>
+                                                <button type="submit" class="btn btn-primary" value="" name="btnModificar"><i class="fas fa-pencil-alt"></i></button>
+                                            </form>
+                                        </td>
 
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="overlay"></div>
-
-
-            <!-- jQuery CDN -->
-            <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-            <!-- Bootstrap Js CDN -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <!-- jQuery Custom Scroller CDN -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $("#sidebar").mCustomScrollbar({
-                        theme: "minimal"
-                    });
-
-                    $('#dismiss, .overlay').on('click', function () {
-                        $('#sidebar').removeClass('active');
-                        $('.overlay').fadeOut();
-                    });
-
-                    $('#sidebarCollapse').on('click', function () {
-                        $('#sidebar').addClass('active');
-                        $('.overlay').fadeIn();
-                        $('.collapse.in').toggleClass('in');
-                        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                    });
-                });
-
-                $(function () {
-                    $("#checkHijos").click(function () {
-                        if ($(this).is(":checked")) {
-                            $("#txtHijos").removeAttr("disabled");
-                            $("#txtHijos").focus();
-                        } else {
-                            $("#txtHijos").attr("disabled", "disabled");
-                        }
-                    });
-                });
-            </script>
         </div>
+
+        <div class="overlay"></div>
+
+
+        <!-- jQuery CDN -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').addClass('active');
+                    $('.overlay').fadeIn();
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+
+            $(function () {
+                $("#checkHijos").click(function () {
+                    if ($(this).is(":checked")) {
+                        $("#txtHijos").removeAttr("disabled");
+                        $("#txtHijos").focus();
+                    } else {
+                        $("#txtHijos").attr("disabled", "disabled");
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

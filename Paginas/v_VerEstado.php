@@ -35,11 +35,13 @@
                         <a href="v_inicio.php"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
                         <div class="container4">
                             <?php
+                            session_start();
                             if (isset($_SESSION["logged"])) {
                                 include_once '../Dto/PostulanteDto.php';
                                 include_once '../Dao/SolicitudDaoImp.php';
                                 $dto = $_SESSION["estado"];
-                                $id_estado = SolicitudDaoImp::MostrarEstadoPorRut($dto->getRut());
+                                $rut = $dto->getRut();
+                                $id_estado = SolicitudDaoImp::MostrarEstadoPorRut($rut);
                                 $estado = SolicitudDaoImp::MostrarEstadoPorRut($id_estado);
                             } else {
                                 $estado = "no hay estado";

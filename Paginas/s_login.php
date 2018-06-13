@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include_once '../Dao/UsuarioDaoImp.php';
 include_once '../Dto/UsuarioDto.php';
@@ -16,7 +17,6 @@ if ($dao->validarRut($dto->getRut())) {
 
     if ($dao->login($dto)) {
 
-        session_start();
         $_SESSION["logged"] = $dao->getUsuario($rut);
         include_once 'v_inicio.php';
     } else {
