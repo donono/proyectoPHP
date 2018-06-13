@@ -119,7 +119,7 @@
                                                     </form>
                                                 </td>
                                                 <td align="center">
-                                                    <form action="s_ModificarSolicitud.php" method="POST">
+                                                    <form action="s_SeleccionarModificar.php" method="POST">
                                                         <input type ="hidden" name="rutModificar" value="<?php echo $postulante->getRut(); ?>"/>
                                                         <button type="submit" class="btn btn-primary" value="" name="btnModificar"><i class="fas fa-pencil-alt"></i></button>
                                                     </form>
