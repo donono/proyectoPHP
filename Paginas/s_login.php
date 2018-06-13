@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include_once '../Dao/UsuarioDaoImp.php';
@@ -16,8 +17,11 @@ $dto->setContrasena($contraseña);
 if ($dao->validarRut($dto->getRut())) {
 
     if ($dao->login($dto)) {
-
-        $_SESSION["logged"] = $dao->getUsuario($rut);
+        $logged = $dao->getUsuario($rut);
+        $_SESSION["rut"] = $logged->getRut();
+        $_SESSION["pass"] = $logged->getContrasena();
+        $_SESSION["nombre"] = $logged->getNombre() . ' ' . $logged->getAp_paterno() . ' ' . $logged->getAp_materno();
+        session_commit();
         include_once 'v_inicio.php';
     } else {
         include_once 'v_login.php';
