@@ -20,11 +20,13 @@ and open the template in the editor.
         include_once '../Dao/RentaDaoImp.php';
 
         if (isset($_SESSION["salida"])) {
+            $dto = new PostulanteDto();
+            $dto = $_SESSION["salida"];
             ?>
 
             <table>
                 <tbody>
-                    <?php foreach ($_SESSION["salida"] as $dto) { ?>
+                    
                         <tr>
                             <td>Rut: <input type="text" name="txtRut" value="<?php echo $dto->getRut(); ?>" /></td>
                             <td>Teléfono: <input type="text" name="txtTelefono" value="<?php echo $dto->getTelefono(); ?>" /></td>
@@ -105,10 +107,10 @@ and open the template in the editor.
                             <td>Hijos: <input type="text" name="txtHijos" value="<?php echo $dto->getHijos(); ?>" /></td>
                             <td>Enfermedad: <?php echo $dto->getEnfermedad(); ?></td>
                         </tr>
-                    <?php } ?>
+                    <?php } ?> 
                 </tbody>
             </table>
 
-        <?php } ?>
+        
     </body>
 </html>
