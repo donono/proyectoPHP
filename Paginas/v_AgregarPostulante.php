@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php session_start(); ?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -40,22 +40,18 @@
 
                 <ul class="list-unstycled components">
                     <p><?php
-                        if (isset($_SESSION["logged"])) {
-                            include_once '../Dto/UsuarioDto.php';
-                            $logged = new UsuarioDto();
-                            $logged = $_SESSION["logged"];
-                            echo $logged->getNombre() . ' ' . $logged->getAp_paterno() . ' ' . $logged->getAp_materno();
+                        if (isset($_SESSION["nombre"])) {
+                            echo $_SESSION["nombre"];
                         } else {
                             echo "no se ha iniciado sesión";
                         }
                         ?>
                     </p>
                     <?php
-                    if (isset($_SESSION["logged"])) {
+                    if (isset($_SESSION["nombre"])) {
                         include_once '../Dto/UsuarioDto.php';
-                        $permiso = new UsuarioDto();
-                        $permiso = $_SESSION["logged"];
-                        if ($permiso->getNombre() != "admin") {
+
+                        if (trim($_SESSION["nombre"]) != "admin") {
                             ?> 
                             <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
                             <li><a href="v_VerEstado.php">Estado Solicitud</a></li>
@@ -252,6 +248,7 @@
         <!-- jQuery Custom Scroller CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
+
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#sidebar").mCustomScrollbar({
@@ -270,7 +267,7 @@
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
             });
-            
+
             $(function () {
                 $("#checkHijos").click(function () {
                     if ($(this).is(":checked")) {
