@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
 
-        <link type="text/css" rel="stylesheet" href="css/style_1.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style_3.css"/>
         <!-- font Awesome -->
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
 
@@ -24,82 +24,33 @@
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-
-        <script type="text/javascript">
-
-        </script>
     </head>
     <body>
 
-        <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div id="dismiss">
-                    <i class="glyphicon glyphicon-arrow-left"></i>
-                </div>
-
-                <div class="sidebar-header">
-                    <a href="v_inicio.php"><h3>DAICREDIT</h3></a>
-                </div>
-
-                <ul class="list-unstycled components">
-                    <p><?php
-                        if (isset($_SESSION["logged"])) {
-                            include_once '../Dto/UsuarioDto.php';
-                            $logged = new UsuarioDto();
-                            $logged = $_SESSION["logged"];
-                            echo $logged->getNombre() . ' ' . $logged->getAp_paterno() . ' ' . $logged->getAp_materno();
-                        } else {
-                            echo "no se ha iniciado sesión";
-                        }
-                        ?>
-                    </p>
-                   <?php
-                    if (isset($_SESSION["logged"])) {
-                        include_once '../Dto/UsuarioDto.php';
-                        $permiso = new UsuarioDto();
-                        $permiso = $_SESSION["logged"];
-                        if ($permiso->getNombre() != "admin") {
-                            ?> 
-                            <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
-                            <li><a href="v_VerEstado.php">Estado Solicitud</a></li>
-
-                        <?php } else { ?>
-                            <!-- solo si el usuario es admin, puede ver el listado de solicitudes -->
-
-                            <li><a href="v_MostrarTodas.php">Ver Solicitudes</a></li>
+        <div class="container image">
+            <div class="container">
+                <div class="col-8">
+                    <div class=" col-12">
+                        <!-- aqui va el contenido de la página -->
+                        <a href="v_inicio.php"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
+                        <div class="container4">
                             <?php
-                        }
-                    }
-                    ?>
-                </ul>
-            </nav>
-
-            <div id="content">
-
-                <!-- barra con boton para desplegar menu y cerrar sesión-->
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-
-                        <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Menú</span>
-                            </button>
-                        </div>
-
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="s_logout.php" class="article">Cerrar Sesión</a></li>
-                            </ul>
+                            if (isset($_SESSION["logged"])) {
+                                include_once '../Dto/PostulanteDto.php';
+                                include_once '../Dao/SolicitudDaoImp.php';
+                                $dto = $_SESSION["estado"];
+                                $id_estado = SolicitudDaoImp::MostrarEstadoPorRut($dto->getRut());
+                                $estado = SolicitudDaoImp::MostrarEstadoPorRut($id_estado);
+                            } else {
+                                $estado = "no hay estado";
+                            }
+                            ?>
+                            <p class="box h3" align="center">Estado de Solicitud: <?php echo $estado ?></p>
                         </div>
                     </div>
-                </nav>
-                <!-- aqui va el contenido de la página -->
-
+                </div>
             </div>
         </div>
-
         <div class="overlay"></div>
 
 
@@ -129,5 +80,7 @@
                 });
             });
         </script>
-    </body>
+    </div>
+</body>
 </html>
+

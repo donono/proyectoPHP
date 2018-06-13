@@ -1,4 +1,5 @@
 <?php
+
 include_once '../Dao/PostulanteDaoImp.php';
 $rut = $_POST["rutMostrar"];
 session_start();

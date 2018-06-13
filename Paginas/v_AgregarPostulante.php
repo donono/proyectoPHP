@@ -49,14 +49,29 @@
                             $logged = new UsuarioDto();
                             $logged = $_SESSION["logged"];
                             echo $logged->getNombre() . ' ' . $logged->getAp_paterno() . ' ' . $logged->getAp_materno();
-                        }else{
-                         echo "no se ha iniciado sesión";
+                        } else {
+                            echo "no se ha iniciado sesión";
                         }
                         ?>
                     </p>
-                    <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
-                    <li><a href="v_EstadoSolicitud.php">Estado Solicitud</a></li>
-                    <li><a href="v_MostrarTodas.php">Ver Solicitudes</a></li>
+                    <?php
+                    if (isset($_SESSION["logged"])) {
+                        include_once '../Dto/UsuarioDto.php';
+                        $permiso = new UsuarioDto();
+                        $permiso = $_SESSION["logged"];
+                        if ($permiso->getNombre() != "admin") {
+                            ?> 
+                            <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
+                            <li><a href="v_VerEstado.php">Estado Solicitud</a></li>
+
+                        <?php } else { ?>
+                            <!-- solo si el usuario es admin, puede ver el listado de solicitudes -->
+
+                            <li><a href="v_MostrarTodas.php">Ver Solicitudes</a></li>
+                            <?php
+                        }
+                    }
+                    ?>
                 </ul>
             </nav>
 
@@ -65,11 +80,10 @@
                 <!-- barra con boton para desplegar menu y cerrar sesión-->
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
-
                         <div class="navbar-header">
                             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                                 <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Abrir Menú</span>
+                                <span>Menú</span>
                             </button>
                         </div>
 
@@ -224,7 +238,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">                                        
-                                            <input type="submit" class="btn btn-success btn-sm btn-block" value="Postular" name="btnPostular" />
+                                        <input type="submit" class="btn btn-success btn-sm btn-block" value="Postular" name="btnPostular" />
                                     </div>
                                 </form>
                             </div>
