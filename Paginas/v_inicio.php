@@ -22,7 +22,7 @@
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div id="dismiss">
-                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    <i class="fas fa-chevron-left fa-2x"></i>
                 </div>
 
                 <div class="sidebar-header">
@@ -42,9 +42,21 @@
                     if (isset($_SESSION["nombre"])) {
                         include_once '../Dto/UsuarioDto.php';
 
+                        //desplegar menú segun tipo de usuario en la sesion
                         if (trim($_SESSION["nombre"]) != "admin") {
-                            ?> 
-                            <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
+
+                            //deshabilitar link "Crear solicitud" si el usuario 
+                            //ya posee una solicitud creada
+                            include_once '../Dao/SolicitudDaoImp.php';
+                            $rut = trim($_SESSION["rut"]);
+
+                            if (SolicitudDaoImp::tieneSolicitud($rut)) {
+                                ?> 
+                                <li class="disabled"><a class="disabled" href="#">Crear Solicitud</a></li>
+                            <?php } else { ?>
+                                <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
+
+                            <?php } ?>
                             <li><a href="v_VerEstado.php">Estado Solicitud</a></li>
 
                         <?php } else { ?>
@@ -79,7 +91,25 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
+                <?php
+                if (isset($_SESSION["rut"])) {
+                    include_once '../Dao/SolicitudDaoImp.php';
+                    $rut = $_SESSION["rut"];
+                    if (SolicitudDaoImp::tieneSolicitud($rut)) {
+                        ?>  
+                        <div class="container alerta"> 
+                            <div class="cont-estado">
 
+                                <div class="estado">
+                                    <h3 style="color: white">Usted ya cuenta con una solicitud enviada,
+                                        por lo cual, ahora solo puede acceder al estado de ésta.
+                                    </h3>
+                                </div>                               
+
+                            </div>
+                        </div>
+                    <?php }
+                } ?>
             </div>
         </div>
 

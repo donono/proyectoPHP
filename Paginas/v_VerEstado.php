@@ -42,9 +42,21 @@
                     if (isset($_SESSION["nombre"])) {
                         include_once '../Dto/UsuarioDto.php';
 
+                        //desplegar menú segun tipo de usuario en la sesion
                         if (trim($_SESSION["nombre"]) != "admin") {
-                            ?> 
-                            <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
+
+                            //deshabilitar link "Crear solicitud" si el usuario 
+                            //ya posee una solicitud creada
+                            include_once '../Dao/SolicitudDaoImp.php';
+                            $rut = trim($_SESSION["rut"]);
+
+                            if (SolicitudDaoImp::tieneSolicitud($rut)) {
+                                ?> 
+                                <li class="disabled"><a class="disabled" href="#">Crear Solicitud</a></li>
+                            <?php } else { ?>
+                                <li><a href="v_AgregarPostulante.php">Crear Solicitud</a></li>
+
+                            <?php } ?>
                             <li><a href="v_VerEstado.php">Estado Solicitud</a></li>
 
                         <?php } else { ?>
@@ -73,7 +85,7 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="s_logout.php" class="article">Cerrar Sesión</a></li>
+                                <li><a href="s_logout.php" class="article"><i class="fa fa-door-open fa-w-20"></i>&nbsp;&nbsp;Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -93,7 +105,8 @@
                                 $estado = "no hay estado";
                             }
                             ?>
-                            <H3 class="estado">Estado de Solicitud: <?php echo $estado; ?></H3>
+                        <div class="estado"><h2 style="text-align: left; float:left">Estado de Solicitud:</h2>&nbsp;<h2 style="text-align: right; float: right; color: chocolate"><?php echo $estado; ?></h2>
+                        </div>
                     </div>
                 </div>
             </div>

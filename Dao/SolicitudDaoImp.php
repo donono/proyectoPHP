@@ -66,60 +66,59 @@ class SolicitudDaoImp {
             throw new Exception("Error al mostrar estado " . $ex->getTraceAsString());
         }
     }
-    
-    public static function IdToText($id){
-        try{
+
+    public static function IdToText($id) {
+        try {
             $texto = "";
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM solicitud WHERE estado=?");
             $stmt->bindParam(1, $id);
             $stmt->execute();
             $rs = $stmt->fetchAll();
-            
+
             foreach ($rs as $value) {
-                if($value["estado"]==1){
+                if ($value["estado"] == 1) {
                     $texto = "Pendiente";
-                }else if($value["estado"]==2){
+                } else if ($value["estado"] == 2) {
                     $texto = "Aprobada";
-                }else{
+                } else {
                     $texto = "Reprobada";
                 }
             }
-            
+
             return $texto;
-                    
         } catch (Exception $ex) {
             echo "Error al convertir " . $ex->getMessage();
         }
     }
-    
-    public static function Eliminar($rut){
-        try{
+
+    public static function Eliminar($rut) {
+        try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("DELETE FROM solicitud WHERE rut=?");
             $stmt->bindParam(1, $rut);
             $stmt->execute();
-            
-            if($stmt->rowCount()>0){
+
+            if ($stmt->rowCount() > 0) {
                 return true;
             }
             $pdo = null;
         } catch (Exception $ex) {
             echo "No se pudo eliminar " . $ex->getMessage();
-        }   
+        }
         return false;
     }
-    
-    public static function ListarPorRut($rut){
+
+    public static function ListarPorRut($rut) {
         $dto = new SolicitudDto();
-        try{
+        try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM solicitud WHERE rut = ?");
             $stmt->bindParam(1, $rut);
             $stmt->execute();
-            
+
             $rs = $stmt->fetchAll();
-            
+
             foreach ($rs as $value) {
                 $dto = new SolicitudDto();
                 $dto->setRut($value["rut"]);
@@ -130,21 +129,41 @@ class SolicitudDaoImp {
             echo "Error al listar " . $ex->getMessage();
         }
     }
-    
-    public static function Modificar($dto){
-        try{
+
+    public static function Modificar($dto) {
+        try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("UPDATE solicitud SET estado = ? WHERE rut=?");
             $stmt->bindValue(1, $dto->getEstado());
             $stmt->bindValue(2, $dto->getRut());
             $stmt->execute();
-            
-            if($stmt->rowCount()>0){
+
+            if ($stmt->rowCount() > 0) {
                 return true;
             }
             $pdo = null;
         } catch (Exception $ex) {
-            echo "Error al modificar ".$ex->getMessage();
+            echo "Error al modificar " . $ex->getMessage();
+        }
+    }
+
+    public static function tieneSolicitud($rut) {
+        $dto = new SolicitudDto();
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM solicitud WHERE rut = ?");
+            $stmt->bindParam(1, $rut);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+            $pdo = null;
+        } catch (Exception $ex) {
+            echo "Error al validar si el usuario ya tiene una solicitud" . $ex->getMessage();
         }
     }
 

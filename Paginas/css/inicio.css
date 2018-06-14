@@ -67,9 +67,9 @@ a, a:hover, a:focus {
 }
 
 #dismiss {
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
+    width: 25px;
+/*    height: 35px;*/
+    line-height: 30px;
     text-align: center;
     background: #7386D5;
     position: absolute;
@@ -118,6 +118,9 @@ a, a:hover, a:focus {
     color: #7386D5;
     background: #fff;
 }
+#sidebar ul li a:hover.disabled {
+
+}
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
@@ -164,8 +167,10 @@ a.download {
     color: #7386D5;
 }
 a.article, a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
+    background: url(https://webgradients.com/public/webgradients_png/077%20Cold%20Evening.png) !important;
+    color: #fafafa !important;
+    border-radius: 5px;
+    height: 50px;
 }
 
 

@@ -30,6 +30,24 @@ div.image {
     height: 560px !important;
 }
 
+div.alerta {
+    background-image:url(https://webgradients.com/public/webgradients_png/101%20Palo%20Alto.png) !important;
+    opacity: 1 !important;
+    border-radius: 5px !important;
+    width: 70% !important;
+    height: 100px !important;
+}
+
+.cont-estado{
+    position:relative;
+}
+.estado{
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -400px;
+    margin-top: 10px;
+}
 .outer-div
 {
      padding: 30px !important;
