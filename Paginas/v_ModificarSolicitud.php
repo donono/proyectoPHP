@@ -110,7 +110,24 @@ and open the template in the editor.
 
                     <tr>
                         <td>Hijos: <input type="text" name="txtHijos" value="<?php echo $dto->getHijos(); ?>" /></td>
-                        <td>Enfermedad: <?php echo $dto->getEnfermedad(); ?></td>
+
+                        <td>
+                            <?php $enfermedad = $dto->getEnfermedad(); ?>
+
+                            <?php if ($enfermedad == 0) {
+                                ?>
+                                Enfermedad
+                                <input type = "checkbox" name = "checkEnfermedad" value= "0" checked="" />
+
+                                <?php
+                            }
+                            ?>
+                            <?php if ($enfermedad == 1) { ?>
+                                Enfermedad
+                                <input type = "checkbox" name = "checkEnfermedad" value= "1" checked="true" />
+                            <?php } ?>
+                        </td>
+
                     </tr>
 
 
@@ -157,8 +174,12 @@ and open the template in the editor.
                             ?>
                         </td>
                     </tr>
-                    <input type ="hidden" name="rutModificar" value="<?php echo $dto->getRut(); ?>"/>
-                    <input type="submit" value="Actualizar" name="btnActualizar" value="" />
+                    <tr>
+                        <td>
+                            <input type ="hidden" name="rutModificar" value="<?php echo $dto->getRut(); ?>"/>
+                            <input type="submit" value="Actualizar" name="btnActualizar" value="" />
+                        </td>
+                    </tr>
                 </form>
 
 
