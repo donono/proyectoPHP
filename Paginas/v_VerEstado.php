@@ -79,9 +79,9 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
+
                 <div class="container image">
-                    <div class="container pt-5">
-                        <div class="container4">
+                    <div class="cont-estado">
                             <?php
                             if (isset($_SESSION["rut"])) {
                                 include_once '../Dto/PostulanteDto.php';
@@ -93,8 +93,7 @@
                                 $estado = "no hay estado";
                             }
                             ?>
-                            <p class="box h3" align="center">Estado de Solicitud: <?php echo $estado; ?></p>
-                        </div>
+                            <H3 class="estado">Estado de Solicitud: <?php echo $estado; ?></H3>
                     </div>
                 </div>
             </div>
