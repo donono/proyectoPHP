@@ -101,7 +101,7 @@
                             <div class="cont-estado">
 
                                 <div class="estado">
-                                    <h3 style="color: white">Usted ya cuenta con una solicitud enviada,
+                                    <h3 class="text-center" style="color: white">Usted ya cuenta con una solicitud enviada,
                                         por lo cual, ahora solo puede acceder al estado de ésta.
                                     </h3>
                                 </div>                               

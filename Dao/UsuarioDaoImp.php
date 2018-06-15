@@ -105,17 +105,15 @@ class UsuarioDaoImp implements BaseDao {
             $stmt->execute();
             $resultado = $stmt->fetchAll();
 
-            foreach ($resultado as $value) {
-                if ($value["rut"] == $key) {
-                    return true;
-                } else {
-                    return false;
-                }
+            if ($stmt->rowCount() > 0) {
+                $pdo = null;
+                return true;
             }
-            $pdo = null;
         } catch (Exception $ex) {
             throw new Exception("Error al validar un usuario. Trace: " . $ex->getTraceAsString());
         }
+        $pdo = null;
+        return false;
     }
 
     public static function login($dto) {
@@ -147,9 +145,9 @@ class UsuarioDaoImp implements BaseDao {
             $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut = ?");
             $stmt->bindParam(1, $key);
             $stmt->execute();
-            
+
             $resultado = $stmt->fetchAll();
-            
+
             foreach ($resultado as $value) {
                 $dto = new UsuarioDto();
                 $dto->setRut($value["rut"]);
@@ -165,6 +163,5 @@ class UsuarioDaoImp implements BaseDao {
         }
         return null;
     }
-    
-    
+
 }

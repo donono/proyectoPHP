@@ -8,7 +8,7 @@ class SolicitudDaoImp {
     public static function AgregarSolicitud($dto) {
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("INSERT INTO solicitud (rut, estado) VALUES (?,?)");
+            $stmt = $pdo->prepare("INSERT INTO solicitud (rut, estado,fecha_creacion) VALUES (?,?,NOW())");
             $stmt->bindParam(1, $rut);
             $stmt->bindParam(2, $estado);
 

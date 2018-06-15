@@ -1,0 +1,97 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06-06-2018, 23:28:05
+    Author     : Daniel GS
+*/
+
+body {
+    /* The image used */
+    background-image: url(https://webgradients.com/public/webgradients_png/103%20Midnight%20Bloom.png);
+    opacity: 0.7;
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+div.image {
+    background-image:url(https://webgradients.com/public/webgradients_png/026%20Saint%20Petersburg.png);
+    opacity: 1 !important;
+    border-radius: 5px;
+    width: 50%;
+    height: 660px;
+}
+
+.logo{
+    content:url(../css/img/logo.png);
+    max-width: 150px; 
+    max-height: 150px;
+    display: block;
+    margin-left: 100px;
+    margin-right: auto 
+}
+
+.outer-div
+{
+    padding: 30px;
+}
+.inner-div
+{
+    display: inline-block;
+    padding: 50px;
+}
+
+
+input{
+    opacity: 1 !important;
+}
+
+input:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+}
+
+.fa-R:before {
+    font-family: 'Barlow Condensed', sans-serif; /* your font family here! */
+    font-weight: bold;
+    content: 'Rut';
+}
+
+.fa-AP:before {
+    font-family: 'Barlow Condensed', sans-serif; /* your font family here! */
+    font-weight: bold;
+    content: 'Apellido Paterno';
+}
+
+.fa-AM:before {
+    font-family: 'Barlow Condensed', sans-serif; /* your font family here! */
+    font-weight: bold;
+    content: 'Apellido Materno';
+}
+
+.fa-N:before {
+    font-family: 'Barlow Condensed', sans-serif; /* your font family here! */
+    font-weight: bold;
+    content: 'Nombre';
+}
+
+.fa-C:before {
+    font-family: 'Barlow Condensed', sans-serif; /* your font family here! */
+    font-weight: bold;
+    content: 'Contraseña';
+}
+
+.fa-RC:before {
+    font-family: 'Barlow Condensed', sans-serif; /* your font family here! */
+    font-weight: bold;
+    content: 'Repita Contraseña';
+}
+
