@@ -39,6 +39,17 @@
                     button: "Cerrar"
                 });
             }
+            function checkRut() {
+                if (document.getElementById('txtRut').value.length < 8)
+                {
+                    document.getElementById('lenghtRut').style.color = 'red';
+                    document.getElementById('lenghtRut').innerHTML = 'rut invalido';
+                    $('#btnRegistrar').attr('disabled', true);
+                } else {
+                    document.getElementById('lenghtRut').innerHTML = '';
+                }
+            }
+            ;
 
             $(document).on('keyup', '#txtRut', function () {
                 var rut = $(this).val();
@@ -109,8 +120,8 @@
                         <br><br>
                         <div class="form row">
                             <div class="form-group col-11">
-                                <span class="fa fa-R"></span>&nbsp;<label class="text-muted" for="txtRut">DNI</label>
-                                <input type="text" class="form-control form-control-sm" name="txtRut" id="txtRut" aria-describedby="rutHelp" placeholder="14.197.443-5" required>
+                                <span class="fa fa-R"></span>&nbsp;<label class="text-muted" for="txtRut">DNI</label>&nbsp;<span id="lenghtRut"></span>
+                                <input type="text" class="form-control form-control-sm" name="txtRut" id="txtRut" aria-describedby="rutHelp" placeholder="14.197.443-5" required onkeyup='checkRut();'>
                                 <small id="rutHelp" class="form-text text-muted">El rut debe estar sin puntos ni guión.</small>
                             </div>
                         </div>
