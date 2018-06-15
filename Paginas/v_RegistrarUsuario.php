@@ -30,6 +30,7 @@
                     button: "Cerrar"
                 });
             }
+
             function ExitoRegister() {
                 swal({
                     title: 'Exito!',
@@ -38,7 +39,6 @@
                     button: "Cerrar"
                 });
             }
-
 
             $(document).on('keyup', '#txtRut', function () {
                 var rut = $(this).val();
@@ -61,14 +61,43 @@
                 );
             }
 
-
             function Respustafunction(response) {
                 if (response.d === '1') {
                     swal('El rut ingresado ya existe!', '', 'warning');
-                }else{
+                } else {
                     console.log(response.d);
                 }
             }
+
+            $(document).ready(function () {
+                $('#btnRegistrar').attr('disabled', true);
+            });
+
+            function check() {
+                //no desencadenar el aviso si el campo esta vacio
+                if (document.getElementById('txtContrasena').value !== "") {
+                    //validar que el largo de la contraseña no sea menor a 8
+                    if (document.getElementById('txtContrasena').value.length < 8)
+                    {
+                        document.getElementById('lenght').style.color = 'red';
+                        document.getElementById('lenght').innerHTML = 'contraseña muy corta';
+                        $('#btnRegistrar').attr('disabled', true);
+                    } else {
+                        document.getElementById('lenght').innerHTML = '';
+                    }
+                    //validar claves iguales
+                    if (document.getElementById('txtContrasena').value ===
+                            document.getElementById('txtConfirmarContrasena').value) {
+                        document.getElementById('confirm').style.color = 'green';
+                        $('#btnRegistrar').attr('disabled', false);
+
+                    } else {
+                        document.getElementById('confirm').style.color = 'red';
+                        $('#btnRegistrar').attr('disabled', true);
+                    }
+                }
+            }
+            ;
         </script>
     </head>
     <body>
@@ -105,20 +134,20 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-11">
-                                <span class="fa fa-C"></span>&nbsp;<label class="text-muted" for="txtContrasena">Password</label>
-                                <input type="text" class="form-control form-control-sm" name="txtContrasena" id="txtContrasena" placeholder="contraseña" required>
+                                <span class="fa fa-C"></span>&nbsp;<label class="text-muted" for="txtContrasena">Password</label>&nbsp;<span id="lenght"></span>
+                                <input type="password" class="form-control form-control-sm" name="txtContrasena" id="txtContrasena" placeholder="contraseña" required onkeyup='check();'>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-11">
-                                <span class="fa fa-RC"></span>&nbsp;<label class="text-muted" for="txtConfirmarContrasena">Repeat password</label>
-                                <input type="text" class="form-control form-control-sm" name="txtConfirmarContrasena" id="txtConfirmarContrasena" placeholder="contraseña" required>
+                                <span class="fa fa-RC" id="confirm"></span>&nbsp;<label class="text-muted" for="txtConfirmarContrasena">confirm password</label>
+                                <input type="password" class="form-control form-control-sm" name="txtConfirmarContrasena" id="txtConfirmarContrasena" placeholder="contraseña" required onkeyup='check();'>
                             </div>
                         </div>
 
                         <br>
                         <div class="pr-5" align="center">
-                            <input type="submit" class="btn btn-outline-primary" value="Registrar" name="btnRegistrar" />
+                            <input type="submit" class="btn btn-outline-primary" value="Registrar" name="btnRegistrar" id="btnRegistrar"/>
                         </div>
                     </form>
                 </div>
