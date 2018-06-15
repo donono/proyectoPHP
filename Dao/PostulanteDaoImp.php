@@ -104,6 +104,52 @@ class PostulanteDaoImp implements BaseDao {
     }
 
     public static function modificar($dto) {
+        try{
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("UPDATE postulante "
+                    . " SET nombre= ?, "
+                    . " ap_paterno= ?, "
+                    . " ap_materno = ?, "
+                    . " fecha_nacimiento= ?, "
+                    . " sexo= ?, "
+                    . " hijos= ?, "
+                    . " telefono= ?, "
+                    . " email= ?, "
+                    . " direccion= ?, "
+                    . " enfermedad= ?, "
+                    . " sueldo= ?, "
+                    . " id_estado= ?, "
+                    . " id_renta= ?, "
+                    . " id_educacion= ?, "
+                    . " id_comuna= ? "
+                    . " WHERE rut= ?");
+            
+            $stmt->bindValue(1, $dto->getNombre());
+            $stmt->bindValue(2, $dto->getAp_paterno());
+            $stmt->bindValue(3, $dto->getAp_materno());
+            $stmt->bindValue(4, $dto->getFechaNacimiento());
+            $stmt->bindValue(5, $dto->getSexo());
+            $stmt->bindValue(6, $dto->getHijos());
+            $stmt->bindValue(7, $dto->getTelefono());
+            $stmt->bindValue(8, $dto->getEmail());
+            $stmt->bindValue(9, $dto->getDireccion());
+            $stmt->bindValue(10, $dto->getEnfermedad());
+            $stmt->bindValue(11, $dto->getSueldo());
+            $stmt->bindValue(12, $dto->getEstadoCivil());
+            $stmt->bindValue(13, $dto->getRenta());
+            $stmt->bindValue(14, $dto->getEducacion());
+            $stmt->bindValue(15, $dto->getComuna());
+            $stmt->bindValue(16, $dto->getRut());
+            
+            $stmt->execute();
+            
+            if($stmt->rowCount()>0){
+                return true;
+            }
+            $pdo = null;
+        } catch (Exception $ex) {
+            echo "Error al actualizar ".$ex->getMessage();
+        }
         
     }
 

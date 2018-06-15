@@ -17,7 +17,7 @@ interface BaseDao {
     
     public static function eliminar($key);
     
-    public static function modificar($dto);
+    public static  function modificar($dto);
     
     public static function listarTodos();
 }
