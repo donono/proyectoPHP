@@ -94,19 +94,28 @@
 
                 <div class="container image">
                     <div class="cont-estado">
-                            <?php
-                            if (isset($_SESSION["rut"])) {
-                                include_once '../Dto/PostulanteDto.php';
-                                include_once '../Dao/SolicitudDaoImp.php';
-                                $rut = $_SESSION["rut"];
-                                $id_estado = SolicitudDaoImp::MostrarEstadoPorRut($rut);
-                                $estado = SolicitudDaoImp::IdToText($id_estado);
-                            } else {
-                                $estado = "no hay estado";
-                            }
-                            ?>
-                        <div class="estado"><h2 style="text-align: left; float:left">Estado de Solicitud:</h2>&nbsp;<h2 style="text-align: right; float: right; color: chocolate"><?php echo $estado; ?></h2>
+                        <?php
+                        if (isset($_SESSION["rut"])) {
+                            include_once '../Dto/PostulanteDto.php';
+                            include_once '../Dao/SolicitudDaoImp.php';
+                            $rut = $_SESSION["rut"];
+                            $id_estado = SolicitudDaoImp::MostrarEstadoPorRut($rut);
+                            $estado = SolicitudDaoImp::IdToText($id_estado);
+                        } else {
+                            $estado = "no hay estado";
+                        }
+                        ?>
+                        <div class="estado">
+                            <h2 style="text-align: left; float:left">Estado de Solicitud:</h2>&nbsp;
+                            <h2 style="text-align: right; float: right; color: chocolate">
+                                <?php echo $estado; ?>
+                            </h2>
                         </div>
+                        <?php if ($estado == 'Aprobada') { ?>
+                            <div class="aprobado">
+                                <span class="text-muted">“Dentro de un plazo máximo de 72 horas, un ejecutivo se contactará telefónicamente con usted”.</span>
+                            </div>     
+                        <?php } ?>
                     </div>
                 </div>
             </div>
