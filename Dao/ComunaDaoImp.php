@@ -25,7 +25,8 @@ class ComunaDaoImp {
         try{
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("SELECT id_comuna FROM comuna WHERE nombre=?");
-            $stmt->bindParam(1, $text);
+            $texto = utf8_decode($text);
+            $stmt->bindParam(1, $texto);
             $stmt->execute();
             
             $res = $stmt->fetchAll();

@@ -35,10 +35,18 @@ if (isset($_POST["checkEnfermedad"])) {
 }
 
 $postulante->setSueldo($_POST["txtSueldo"]);
-$postulante->setEstadoCivil(EstadoCivilDaoImp::TextToId($_POST["dropEstadoCivil"]));
-$postulante->setRenta(RentaDaoImp::TextToId($_POST["dropRenta"]));
-$postulante->setEducacion(EducacionDaoImp::TextToId($_POST["dropEducacion"]));
-$postulante->setComuna(ComunaDaoImp::TextToId($_POST["dropComuna"]));
+
+$estadoCivil = $_POST["dropEstadoCivil"];
+$postulante->setEstadoCivil(EstadoCivilDaoImp::TextToId($estadoCivil));
+
+$renta = $_POST["dropRenta"];
+$postulante->setRenta(RentaDaoImp::TextToId($renta));
+
+$educacion = $_POST["dropEducacion"];
+$postulante->setEducacion(EducacionDaoImp::TextToId($educacion));
+
+$comuna = $_POST["dropComuna"];
+$postulante->setComuna(ComunaDaoImp::TextToId($comuna));
 
 
 if(PostulanteDaoImp::modificar($postulante) && SolicitudDaoImp::Modificar($dto)){

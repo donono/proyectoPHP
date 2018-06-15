@@ -58,8 +58,8 @@ and open the template in the editor.
                                     <?php
                                     include_once '../Dao/ComunaDaoImp.php';
                                     $opcionC = ComunaDaoImp::ListarTodas();
-                                    foreach ($opcionC as $value) {
-                                        echo "<option> $value </option>";
+                                    foreach ($opcionC as $valueC) {
+                                        echo "<option> $valueC </option>";
                                     }
                                     ?>
                                 </select></td>
@@ -68,20 +68,20 @@ and open the template in the editor.
                         <tr>
                             <td>Fecha Nacimiento: <input type="date" class="form-control" name="dateNacimiento" id="dateNacimiento" required
                                                          value="<?php $dto->getFechaNacimiento(); ?>"></td>
-                            
+
                             <td>Educación: <select class="form-control" name="dropEducacion" id="dropEducacion">
-                                    
-                                    <?php 
+
+                                    <?php
                                     $idEducacion = $dto->getEducacion();
                                     $textoEducacion = EducacionDaoImp::IdToText($idEducacion);
                                     ?>
-                                    
+
                                     <option value="<?php $textoEducacion; ?>" disabled="" selected="true">Seleccionar...</option>
                                     <?php
                                     include_once '../Dao/EducacionDaoImp.php';
                                     $opcionEd = EducacionDaoImp::Listar();
-                                    foreach ($opcionEd as $value) {
-                                        echo "<option> $value </option>";
+                                    foreach ($opcionEd as $valueE) {
+                                        echo "<option> $valueE </option>";
                                     }
                                     ?>
                                 </select></td>
@@ -117,18 +117,17 @@ and open the template in the editor.
                             </td>
 
                             <td>Renta: <select class="form-control" name="dropRenta" id="dropRenta">
-                                    
-                                    <?php 
+
+                                    <?php
                                     $idRenta = $dto->getRenta();
                                     $textoRenta = RentaDaoImp::IdToText($idRenta);
-                                    
                                     ?>
                                     <option value="<?php $textoRenta; ?>" disabled="" selected="true">Seleccionar...</option>
                                     <?php
                                     include_once '../Dao/RentaDaoImp.php';
                                     $opcionR = RentaDaoImp::Listar();
-                                    foreach ($opcionR as $value) {
-                                        echo "<option> $value </option>";
+                                    foreach ($opcionR as $valueR) {
+                                        echo "<option> $valueR </option>";
                                     }
                                     ?>
                                 </select></td>
@@ -136,18 +135,17 @@ and open the template in the editor.
 
                         <tr>
                             <td>Estado Civil: <select class="form-control" name="dropEstadoCivil" id="dropEstadoCivil">
-                                    
-                                    <?php 
+
+                                    <?php
                                     $idEstado = $dto->getEstadoCivil();
                                     $textoEstado = EstadoCivilDaoImp::IdToText($idEstado);
-                                    
                                     ?>
-                                    <option value="<?php $textoEstado;?>" disabled="" selected="true">Seleccionar...</option>
+                                    <option value="<?php $textoEstado; ?>" disabled="" selected="true">Seleccionar...</option>
                                     <?php
                                     include_once '../Dao/EstadoCivilDaoImp.php';
                                     $opcionEs = EstadoCivilDaoImp::Listar();
-                                    foreach ($opcionEs as $value) {
-                                        echo "<option> $value </option>";
+                                    foreach ($opcionEs as $valueEs) {
+                                        echo "<option> $valueEs </option>";
                                     }
                                     ?>
                                 </select></td>
@@ -226,9 +224,6 @@ and open the template in the editor.
                                 <input type="submit" value="Actualizar" name="btnActualizar" value="" />
                             </td>
                         </tr>
-
-
-
                     <?php } ?> 
                 </tbody>
             </table>
