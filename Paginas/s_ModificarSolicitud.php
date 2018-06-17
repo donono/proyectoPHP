@@ -23,7 +23,11 @@ $postulante->setAp_paterno($_POST["txtPaterno"]);
 $postulante->setAp_materno($_POST["txtMaterno"]);
 $postulante->setFechaNacimiento($_POST["dateNacimiento"]);
 $postulante->setSexo($_POST["radioSexo"]);
-$postulante->setHijos($_POST["txtHijos"]);
+if (!isset($_POST["checkHijos"])) {
+    $postulante->setHijos(0); //si no se selecciona el checkbox de hijos la cantidad sera 0 por defecto
+} else {
+    $postulante->setHijos($_POST["txtHijos"]);
+}
 $postulante->setTelefono($_POST["txtTelefono"]);
 $postulante->setEmail($_POST["txtEmail"]);
 $postulante->setDireccion($_POST["txtDireccion"]);
@@ -36,24 +40,25 @@ if (isset($_POST["checkEnfermedad"])) {
 
 $postulante->setSueldo($_POST["txtSueldo"]);
 
-$estadoCivil = $_POST["dropEstadoCivil"];
+$estadoCivil = trim($_POST["dropEstadoCivil"]);
 $postulante->setEstadoCivil(EstadoCivilDaoImp::TextToId($estadoCivil));
 
-$renta = $_POST["dropRenta"];
+$renta = trim($_POST["dropRenta"]);
 $postulante->setRenta(RentaDaoImp::TextToId($renta));
 
-$educacion = $_POST["dropEducacion"];
+$educacion = trim($_POST["dropEducacion"]);
 $postulante->setEducacion(EducacionDaoImp::TextToId($educacion));
 
-$comuna = $_POST["dropComuna"];
+$comuna = trim($_POST["dropComuna"]);
 $postulante->setComuna(ComunaDaoImp::TextToId($comuna));
 
 
-if(PostulanteDaoImp::modificar($postulante) && SolicitudDaoImp::Modificar($dto)){
-    echo "<script> alert('Registros modificados')</script>";
-}else{
-    echo "<script> alert('No se modificó')</script>";
+if (PostulanteDaoImp::modificar($postulante) && SolicitudDaoImp::Modificar($dto)) {
+    include_once 'v_MostrarTodas.php';
+    echo '<script>Success();</script>';
+} else {
+    include_once 'v_MostrarTodas.php';
+    echo '<script>Error();</script>';
 }
 
-include_once 'v_MostrarTodas.php';
 

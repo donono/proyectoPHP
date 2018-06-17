@@ -123,7 +123,7 @@
 
                                     <tr >
                                         <td> <?php echo $postulante->getRut(); ?> </td>
-                                        <td> <?php echo $postulante->getNombre() . " " . $postulante->getAp_paterno(); ?></td>
+                                        <td> <?php echo $postulante->getNombre() . " " . $postulante->getAp_paterno() . " " . $postulante->getAp_materno(); ?></td>
                                         <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
                                         <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
                                         <td> <?php echo $texto ?> </td>
@@ -159,6 +159,8 @@
 
         <div class="overlay"></div>
 
+        <!-- sweet alert -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -185,6 +187,24 @@
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
             });
+
+            function Error() {
+                swal({
+                    title: "Error!",
+                    text: "Error al actualizar solicitud!",
+                    icon: "error",
+                    button: "Cerrar"
+                });
+            };
+
+            function Success() {
+                swal({
+                    title: "Exito",
+                    text: "Solicitud actualizada!",
+                    icon: "success",
+                    button: "Cerrar"
+                });
+            };
         </script>
     </body>
 </html>

@@ -109,7 +109,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-sm-4">
                                         <label for="txtRut">Rut</label>
-                                        <input type="text" class="form-control" name="txtRut" id="txtRut" value="<?php echo $dto->getRut(); ?>" required>
+                                        <input type="text" readonly class="form-control" name="txtRut" id="txtRut" value="<?php echo $dto->getRut(); ?>" required>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="txtTelefono">Telefono</label>
@@ -148,7 +148,7 @@
                                             $idComuna = $dto->getComuna();
                                             $textoComuna = ComunaDaoImp::IdToText($idComuna);
                                             ?>
-                                            <option value="<?php echo $idComuna; ?>" disabled="" selected="true"><?php echo $textoComuna; ?></option>
+                                            <option selected="true"><?php echo $textoComuna; ?></option>
                                             <?php
                                             include_once '../Dao/ComunaDaoImp.php';
                                             $opcionC = ComunaDaoImp::ListarTodas();
@@ -167,12 +167,12 @@
                                 <div class="form-row">
                                     <div class="form-group col-sm-4">
                                         <label for="dropEstadoCivil">Estado Civil</label>
-                                        <select class="form-control" name="dropEstadoCivil">
+                                        <select class="form-control" name="dropEstadoCivil" id="dropEstadoCivil">
                                             <?php
                                             $idEstado = $dto->getEstadoCivil();
                                             $textoEstado = EstadoCivilDaoImp::IdToText($idEstado);
                                             ?>
-                                            <option value="<?php echo $idEstado; ?>" disabled="" selected="true"><?php echo $textoEstado; ?></option>
+                                            <option selected="true"><?php echo $textoEstado; ?></option>
                                             <?php
                                             include_once '../Dao/EstadoCivilDaoImp.php';
                                             $opcionEs = EstadoCivilDaoImp::Listar();
@@ -219,7 +219,7 @@
                                             $textoEducacion = EducacionDaoImp::IdToText($idEducacion);
                                             ?>
 
-                                            <option value="<?php echo $idEducacion; ?>" disabled="" selected="true"><?php echo $textoEducacion; ?></option>
+                                            <option selected="true"><?php echo $textoEducacion; ?></option>
                                             <?php
                                             include_once '../Dao/EducacionDaoImp.php';
                                             $opcionEd = EducacionDaoImp::Listar();
@@ -236,7 +236,7 @@
                                             $idRenta = $dto->getRenta();
                                             $textoRenta = RentaDaoImp::IdToText($idRenta);
                                             ?>
-                                            <option value="<?php echo $idRenta; ?>" disabled="" selected="true"><?php echo $textoRenta; ?></option>
+                                            <option selected="true"><?php echo $textoRenta; ?></option>
                                             <?php
                                             include_once '../Dao/RentaDaoImp.php';
                                             $opcionR = RentaDaoImp::Listar();
@@ -247,8 +247,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="txtSueldoLiquido">Sueldo Líquido</label>
-                                        <input type="text" class="form-control" name="txtSueldoLiquido" id="txtSueldoLiquido" value="<?php echo $dto->getSueldo(); ?>" required>
+                                        <label for="txtSueldo">Sueldo Líquido</label>
+                                        <input type="text" class="form-control" name="txtSueldo" id="txtSueldo" value="<?php echo $dto->getSueldo(); ?>" required>
                                     </div>
                                 </div>
 
@@ -262,8 +262,8 @@
                                                 <label class = "form-check-label" for = "checkHijos">Hijos</label>
                                             </div>
                                             <div class = "float-right col-sm-4 pl-2">
+                                                <input disabled="disabled" class="form-control" type="number" step="any" min="0" max="10" id = "txtHijos" name = "txtHijos" value = "<?php echo $dto->getHijos(); ?>"/>
                                                 <label class = "text-muted" for="txtHijos">Cantidad</label>
-                                                <input disabled="disabled" class="form-control" type="text" id = "txtHijos" name = "txtHijos" value = "<?php echo $dto->getHijos(); ?>"/>
                                             </div>
                                         <?php } ?>
                                         <?php if ($hijos != 0) { ?>
@@ -272,7 +272,7 @@
                                                 <label class = "form-check-label" for = "checkHijos">Hijos</label>
                                             </div>
                                             <div class = "float-right col-sm-4 pl-2">
-                                                <input class="form-control" type = "text" id = "txtHijos" name = "txtHijos" value = "<?php echo $dto->getHijos(); ?>"/>
+                                                <input class="form-control" type = "number"  step="any" min="0" max="10"  id = "txtHijos" name = "txtHijos" value = "<?php echo $dto->getHijos(); ?>"/>
                                                 <label class = "text-muted" for="txtHijos">Cantidad</label>
                                             </div>
                                         <?php } ?>
@@ -309,10 +309,10 @@
                                         <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1" checked="true" autocomplete="off">Pendiente
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">Pendiente
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">Aprobada
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">Pendiente
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">Reprobada
                                     </label>
                                 <?php } ?>
 
@@ -321,10 +321,10 @@
                                         <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1">Pendiente
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2" checked="true" autocomplete="off">Pendiente
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2" checked="true" autocomplete="off">Aprobada
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">Pendiente
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">Reprobada
                                     </label>
                                 <?php } ?>
 
@@ -333,10 +333,10 @@
                                         <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1" >Pendiente
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">Pendiente
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">Aprobada
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3" checked="true" autocomplete="off">Pendiente
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3" checked="true" autocomplete="off">Reprobada
                                     </label>
                                 <?php } ?>
                             </div>
@@ -347,13 +347,14 @@
                             <input type="submit" class="btn btn-success btn-sm btn-block" value="Actualizar" name="btnActualizar" value="" />
                         </div>
                     </div>
-
             </div>
         </form>
     </div>
 
     <div class="overlay"></div>
 
+    <!-- sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -362,8 +363,8 @@
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-
     <script type="text/javascript">
+
         $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
                 theme: "minimal"
@@ -395,22 +396,23 @@
 
         function Error() {
             swal({
-                title: "Error!",
-                text: "Error al enviar solicitud!",
+                title: "",
+                text: "Error al actualizar solicitud!",
                 icon: "error",
                 button: "Cerrar"
             });
         }
+        ;
 
         function Success() {
             swal({
-                title: "Exito",
-                text: "Solicitud enviada!",
+                title: "",
+                text: "Solicitud actualizada!",
                 icon: "success",
                 button: "Cerrar"
             });
         }
+        ;
     </script>
-
 </body>
 </html>

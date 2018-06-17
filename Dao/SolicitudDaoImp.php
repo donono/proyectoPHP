@@ -138,13 +138,11 @@ class SolicitudDaoImp {
             $stmt->bindValue(2, $dto->getRut());
             $stmt->execute();
 
-            if ($stmt->rowCount() > 0) {
-                return true;
-            }
             $pdo = null;
         } catch (Exception $ex) {
             echo "Error al modificar " . $ex->getMessage();
         }
+        return true;
     }
 
     public static function tieneSolicitud($rut) {

@@ -84,7 +84,7 @@ class PostulanteDaoImp implements BaseDao {
         $postulantes = new ArrayObject();
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("SELECT rut, nombre, ap_paterno FROM postulante");
+            $stmt = $pdo->prepare("SELECT * FROM postulante");
             $stmt->execute();
 
             $rs = $stmt->fetchAll();
@@ -94,6 +94,7 @@ class PostulanteDaoImp implements BaseDao {
                 $dto->setRut($sol["rut"]);
                 $dto->setNombre($sol["nombre"]);
                 $dto->setAp_paterno($sol["ap_paterno"]);
+                $dto->getAp_materno($sol["ap_materno"]);
                 $postulantes->append($dto);
             }
             $pdo = null;
@@ -104,7 +105,7 @@ class PostulanteDaoImp implements BaseDao {
     }
 
     public static function modificar($dto) {
-        try{
+        try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("UPDATE postulante "
                     . " SET nombre= ?, "
@@ -123,34 +124,48 @@ class PostulanteDaoImp implements BaseDao {
                     . " id_educacion= ?, "
                     . " id_comuna= ? "
                     . " WHERE rut= ?");
-            
-            $stmt->bindValue(1, $dto->getNombre());
-            $stmt->bindValue(2, $dto->getAp_paterno());
-            $stmt->bindValue(3, $dto->getAp_materno());
-            $stmt->bindValue(4, $dto->getFechaNacimiento());
-            $stmt->bindValue(5, $dto->getSexo());
-            $stmt->bindValue(6, $dto->getHijos());
-            $stmt->bindValue(7, $dto->getTelefono());
-            $stmt->bindValue(8, $dto->getEmail());
-            $stmt->bindValue(9, $dto->getDireccion());
-            $stmt->bindValue(10, $dto->getEnfermedad());
-            $stmt->bindValue(11, $dto->getSueldo());
-            $stmt->bindValue(12, $dto->getEstadoCivil());
-            $stmt->bindValue(13, $dto->getRenta());
-            $stmt->bindValue(14, $dto->getEducacion());
-            $stmt->bindValue(15, $dto->getComuna());
-            $stmt->bindValue(16, $dto->getRut());
-            
+
+            $stmt->bindParam(1, $nombre);
+            $stmt->bindParam(2, $ap_paterno);
+            $stmt->bindParam(3, $ap_materno);
+            $stmt->bindParam(4, $fecha);
+            $stmt->bindParam(5, $sexo);
+            $stmt->bindParam(6, $hijos);
+            $stmt->bindParam(7, $telefono);
+            $stmt->bindParam(8, $email);
+            $stmt->bindParam(9, $direccion);
+            $stmt->bindParam(10, $enfermedad);
+            $stmt->bindParam(11, $sueldo);
+            $stmt->bindParam(12, $estado_civil);
+            $stmt->bindParam(13, $renta);
+            $stmt->bindParam(14, $educacion);
+            $stmt->bindParam(15, $comuna);
+            $stmt->bindParam(16, $rut);
+
+            $nombre = $dto->getNombre();
+            $ap_paterno = $dto->getAp_paterno();
+            $ap_materno = $dto->getAp_materno();
+            $fecha = $dto->getFechaNacimiento();
+            $sexo = $dto->getSexo();
+            $hijos = $dto->getHijos();
+            $telefono = $dto->getTelefono();
+            $email = $dto->getEmail();
+            $direccion = $dto->getDireccion();
+            $enfermedad = $dto->getEnfermedad();
+            $sueldo = $dto->getSueldo();
+            $estado_civil = $dto->getEstadoCivil();
+            $renta = $dto->getRenta();
+            $educacion = $dto->getEducacion();
+            $comuna = $dto->getComuna();
+            $rut = $dto->getRut();
+
             $stmt->execute();
-            
-            if($stmt->rowCount()>0){
-                return true;
-            }
+
             $pdo = null;
         } catch (Exception $ex) {
-            echo "Error al actualizar ".$ex->getMessage();
+            echo "Error al actualizar " . $ex->getMessage();
         }
-        
+        return true;
     }
 
     public static function BuscarPorRut($rut) {
