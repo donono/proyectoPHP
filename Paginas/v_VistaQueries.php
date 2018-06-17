@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
-
+<?php
+if (!isset($_SESSION["rut"])) {
+    echo '<script type="text/javascript">
+document.location="v_login.php";
+</script>';
+}
+?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
 
-        <link type="text/css" rel="stylesheet" href="css/style_2.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style_1.css"/>
         <!-- font Awesome -->
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
 
@@ -15,6 +21,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+        <!-- FONT  -->
+        <link href='https://fonts.googleapis.com/css?family=Barlow+Condensed:700' rel='stylesheet' type='text/css'>
 
         <!-- sweet alert -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -71,7 +80,7 @@
 
                         <?php } else { ?>
                             <!-- solo si el usuario es admin, puede ver el listado de solicitudes -->
-
+                            <li><a href="v_VistaQueries.php">Buscar Solicitudes</a></li>
                             <li><a href="v_MostrarTodas.php">Ver Solicitudes</a></li>
                             <?php
                         }
@@ -101,36 +110,40 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
-
-
-                <form action="s_VistaPorRut.php" method="POST">
-                    Búsqueda por Rut
-                    <input type="text" name="txtRut" value="" />
-                    <input type="submit" value="Mostrar" name="btnVerPorRut" />
-       
-                </form>
-
-
-
                 <div class="container image">
                     <div class="container pt-5">
+                        <br>
+                        <form action="s_VistaPorRut.php" method="POST">
+                            <div>
+                                <div class="col-sm-6 float-left">
+                                    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: bold; font-size: 18px">Búsqueda por Rut</span>
+                                    <input type="text" class="form-control" style="width: 50%" name="txtRut" value="" /><br>
+                                    <input type="submit" class="btn btn-default" value="Mostrar" name="btnVerPorRut" id="btnVerPorRut" />
+                                </div>
+                            </div>
+                        </form>
                         <form action="s_VistaQueries.php" method="POST">
-                            Fecha Inicio:
-                            <input type="date" name="dateInicio" value="" />
-                            Fecha término:
-                            <input type="date" name ="dateFin" value=""/>
-
-                            <input type="submit" value="Mostrar" name="btnMostrar" />
-                            <br><br>
+                            <div class="col-sm-6 float-right">
+                                <div style="position: relative; overflow: auto; float: left">
+                                    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: bold; font-size: 18px" for="dateInicio">Fecha Inicio:</span>
+                                    <input type="date" class="form-control" style="width: 250px" name="dateInicio" value="" />
+                                </div>
+                                <div style="position: relative; overflow: auto; float: right">
+                                    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: bold; font-size: 18px" for="dateFin">Fecha término:</span>
+                                    <input type="date" class="form-control" style="width: 250px" name ="dateFin" value=""/><br>
+                                </div> 
+                            </div>&nbsp;&nbsp;&nbsp;
+                            <input type="submit" value="Mostrar" class="btn btn-default" name="btnMostrar" id="btnMostrar" onclick="checkRut();"/>
+                            <hr class="hr"/>
                             <?php
                             include_once '../Dto/PostulanteDto.php';
                             include_once '../Dao/PostulanteDaoImp.php';
                             include_once '../Dao/SolicitudDaoImp.php';
 
-                            if (isset($_SESSION["salida"])) {
-                                $listaPostulantes = $_SESSION["salida"];
+                            if (isset($_SESSION["salidaFecha"])) {
+                                $listaPostulantes = $_SESSION["salidaFecha"];
                                 ?>
-                                <table class="table">
+                                <table id="fecha" class="table">
                                     <thead class="thead-dark">
                                     <th>Rut</th>
                                     <th>Estado</th>
@@ -173,6 +186,49 @@
                                 </table>
                             <?php }
                             ?>
+                            <!--el buscar por rut-->
+                            <?php
+                            if (isset($_SESSION["salidaRut"])) {
+                                $postulante = $_SESSION["salidaRut"];
+                                ?>
+                                <table id="rut" class="table">
+                                    <thead class="thead-dark">
+                                    <th>Rut</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr >
+                                            <td> <?php echo $postulante->getRut(); ?> </td>
+
+                                            <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
+                                            <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
+                                            <td> <?php echo $texto ?> </td>
+
+                                            <td align="center">
+                                                <form action="s_Eliminar.php" method="POST">
+                                                    <input type ="hidden" name="rutEliminar" value="<?php echo $postulante->getRut(); ?>"/>
+                                                    <button type="submit" class="btn btn-danger" value="" name="btnEliminar"><i class="fas fa-times"></i></button>
+                                                </form>
+                                            </td>
+                                            <td align="center">
+                                                <form action="s_MostrarPorRut.php" method="POST">
+                                                    <input type ="hidden" name="rutMostrar" value="<?php echo $postulante->getRut(); ?>"/>
+                                                    <button type="submit" class="btn btn-info" value="Mostrar" name="btnVer"><i class="fas fa-external-link-square-alt"></i></button>
+                                                </form>
+                                            </td>
+                                            <td align="center">
+                                                <form action="s_SeleccionarModificar.php" method="POST">
+                                                    <input type ="hidden" name="rutModificar" value="<?php echo $postulante->getRut(); ?>"/>
+                                                    <button type="submit" class="btn btn-primary" value="" name="btnModificar"><i class="fas fa-pencil-alt"></i></button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <?php }
+                            ?>
                         </form>
                     </div>
                 </div>
@@ -182,6 +238,8 @@
 
         <div class="overlay"></div>
 
+        <!-- sweet alert -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -207,7 +265,7 @@
                     $('.collapse.in').toggleClass('in');
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
-            });
+            });           
         </script>
     </body>
 </html>

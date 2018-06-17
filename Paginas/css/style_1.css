@@ -28,6 +28,8 @@ div.image {
     border-radius: 5px !important;
     width: 90% !important;
     height: 560px !important;
+    z-index: 9;
+    position: relative;
 }
 
 div.alerta {
@@ -66,4 +68,15 @@ input{
 input:hover {
     opacity: 1.0 ;
     filter: alpha(opacity=100);
+}
+
+hr {
+  border: 0 !important;
+  clear:both !important;
+  display:block !important;
+  width: 96% !important;               
+  background-color: cornflowerblue;
+  height: 2px !important;
+  z-index: 10 !important;
+  position: relative !important;
 }

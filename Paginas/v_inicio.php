@@ -1,10 +1,10 @@
 <?php session_start(); ?>
 <?php
-//if (!isset($_SESSION["rut"])) {
-//    echo '<script type="text/javascript">
-//document.location="v_login.php";
-//</script>';
-//}
+if (!isset($_SESSION["rut"])) {
+    echo '<script type="text/javascript">
+document.location="v_login.php";
+</script>';
+}
 ?>
 <html>
     <head>
@@ -68,7 +68,7 @@
 
                         <?php } else { ?>
                             <!-- solo si el usuario es admin, puede ver el listado de solicitudes -->
-
+                            <li><a href="v_VistaQueries.php">Buscar Solicitudes</a></li>
                             <li><a href="v_MostrarTodas.php">Ver Solicitudes</a></li>
                             <?php
                         }
