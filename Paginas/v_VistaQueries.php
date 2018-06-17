@@ -101,6 +101,17 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
+
+
+                <form action="s_VistaPorRut.php" method="POST">
+                    Búsqueda por Rut
+                    <input type="text" name="txtRut" value="" />
+                    <input type="submit" value="Mostrar" name="btnVerPorRut" />
+       
+                </form>
+
+
+
                 <div class="container image">
                     <div class="container pt-5">
                         <form action="s_VistaQueries.php" method="POST">
@@ -122,7 +133,6 @@
                                 <table class="table">
                                     <thead class="thead-dark">
                                     <th>Rut</th>
-                                    
                                     <th>Estado</th>
                                     <th>Acción</th>
                                     </thead>
@@ -132,7 +142,7 @@
 
                                             <tr >
                                                 <td> <?php echo $postulante->getRut(); ?> </td>
-                                                
+
                                                 <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($postulante->getRut()); ?>
                                                 <?php $texto = SolicitudDaoImp::IdToText($estado); ?>
                                                 <td> <?php echo $texto ?> </td>
