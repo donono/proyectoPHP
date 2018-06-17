@@ -232,10 +232,12 @@ document.location="v_login.php";
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
-
+        <?php
+        $_SESSION["salidaFecha"] = null;
+        $_SESSION["salidaRut"] = null;
+        ?>
         <div class="overlay"></div>
 
         <!-- sweet alert -->
@@ -249,23 +251,23 @@ document.location="v_login.php";
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
+                                $(document).ready(function () {
+                                    $("#sidebar").mCustomScrollbar({
+                                        theme: "minimal"
+                                    });
 
-                $('#dismiss, .overlay').on('click', function () {
-                    $('#sidebar').removeClass('active');
-                    $('.overlay').fadeOut();
-                });
+                                    $('#dismiss, .overlay').on('click', function () {
+                                        $('#sidebar').removeClass('active');
+                                        $('.overlay').fadeOut();
+                                    });
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').addClass('active');
-                    $('.overlay').fadeIn();
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
-            });           
+                                    $('#sidebarCollapse').on('click', function () {
+                                        $('#sidebar').addClass('active');
+                                        $('.overlay').fadeIn();
+                                        $('.collapse.in').toggleClass('in');
+                                        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                                    });
+                                });
         </script>
     </body>
 </html>
