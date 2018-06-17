@@ -27,7 +27,15 @@ div.image {
     opacity: 1 !important;
     border-radius: 5px !important;
     width: 90% !important;
-    height: 590px !important;
+    height: 510px !important;
+}
+div.image-footer {
+    background-image:url(https://webgradients.com/public/webgradients_png/026%20Saint%20Petersburg.png) !important;
+    opacity: 1 !important;
+    border-radius: 5px !important;
+    width: 90% !important;
+    height: 120px !important;
+    position: relative;
 }
 
 div.alerta {
@@ -50,12 +58,12 @@ div.alerta {
 }
 .outer-div
 {
-     padding: 30px !important;
+    padding: 30px !important;
 }
 .inner-div
 {
-     display: inline-block !important;
-     padding: 50px !important;
+    display: inline-block !important;
+    padding: 50px !important;
 }
 
 
