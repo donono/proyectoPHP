@@ -167,4 +167,26 @@ class SolicitudDaoImp {
         }
     }
 
+    public static function BuscarPorFecha($entrada, $fin) {
+        $lista = new ArrayObject();
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM SOLICITUD WHERE fecha_creacion BETWEEN ? AND ?");
+            $stmt->bindParam(1, $entrada);
+            $stmt->bindParam(2, $fin);
+            $stmt->execute();
+
+            $rs = $stmt->fetchAll();
+            foreach ($rs as $objeto) {
+                $dto = new SolicitudDto();
+                $dto->setRut($objeto["rut"]);
+                $dto->setEstado($objeto["estado"]);
+                $lista->append($dto);
+            }
+            return $lista;
+        } catch (Exception $ex) {
+            echo "Error al listar ".$ex->getMessage();
+        }
+    }
+
 }
