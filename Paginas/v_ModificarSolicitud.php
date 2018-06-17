@@ -87,24 +87,25 @@
                     </div>
                 </nav>
                 <!-- aqui va el contenido de la página -->
-                <div class="container image">
-                    <div class="container pt-5 col-12">
-                        <br>
-                        <?php
-                        include_once '../Dto/PostulanteDto.php';
-                        include_once '../Dao/PostulanteDaoImp.php';
-                        include_once '../Dao/ComunaDaoImp.php';
-                        include_once '../Dao/EducacionDaoImp.php';
-                        include_once '../Dao/EstadoCivilDaoImp.php';
-                        include_once '../Dao/RentaDaoImp.php';
-                        if (isset($_SESSION["salida"])) {
-                            $dto = new PostulanteDto();
-                            $solicitud = new SolicitudDto();
 
-                            $dto = $_SESSION["salida"];
-                            $dtoSolicitud = $_SESSION["solicitud"];
-                            ?>
-                            <form action="s_ModificarSolicitud.php" method="POST">
+                <?php
+                include_once '../Dto/PostulanteDto.php';
+                include_once '../Dao/PostulanteDaoImp.php';
+                include_once '../Dao/ComunaDaoImp.php';
+                include_once '../Dao/EducacionDaoImp.php';
+                include_once '../Dao/EstadoCivilDaoImp.php';
+                include_once '../Dao/RentaDaoImp.php';
+                if (isset($_SESSION["salida"])) {
+                    $dto = new PostulanteDto();
+                    $solicitud = new SolicitudDto();
+
+                    $dto = $_SESSION["salida"];
+                    $dtoSolicitud = $_SESSION["solicitud"];
+                    ?>
+                    <form action="s_ModificarSolicitud.php" method="POST">
+                        <div class="container image">
+                            <div class="container pt-5 col-12">
+                                <br>
                                 <div class="form-row">
                                     <div class="form-group col-sm-4">
                                         <label for="txtRut">Rut</label>
@@ -159,7 +160,7 @@
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="dateNacimiento">Fecha Nacimiento</label>
-                                        <input type="date" class="form-control" name="dateNacimiento" id="dateNacimiento" value="<?php $dto->getFechaNacimiento(); ?>" required>
+                                        <input type="date" class="form-control" name="dateNacimiento" id="dateNacimiento" value="<?php echo $dto->getFechaNacimiento(); ?>" required>
                                     </div>
                                 </div>
 
@@ -256,13 +257,13 @@
                                         <?php $hijos = $dto->getHijos(); ?>
 
                                         <?php if ($hijos == 0) { ?>
-                                            <div class = "form-check">
+                                            <div class = "form-check">&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <input class = "form-check-input" type = "checkbox" value = "ON" id = "checkHijos" name = "checkHijos">
                                                 <label class = "form-check-label" for = "checkHijos">Hijos</label>
                                             </div>
                                             <div class = "float-right col-sm-4 pl-2">
-                                                <input disabled="disabled" class="form-control" type="text" id = "txtHijos" name = "txtHijos" value = "<?php echo $dto->getHijos(); ?>"/>
                                                 <label class = "text-muted" for="txtHijos">Cantidad</label>
+                                                <input disabled="disabled" class="form-control" type="text" id = "txtHijos" name = "txtHijos" value = "<?php echo $dto->getHijos(); ?>"/>
                                             </div>
                                         <?php } ?>
                                         <?php if ($hijos != 0) { ?>
@@ -295,128 +296,121 @@
                                         <?php } ?>
                                     </div>                                    
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($dto->getRut()); ?>
-                                        <label>Estado</label>
-                                        <?php if ($estado == 1) { ?>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1" checked="true" autocomplete="off">
-                                                <label class="form-check-label" for="radioEstado1">Pendiente</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">
-                                                <label class="form-check-label" for="radioEstado2">Aprobar</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">
-                                                <label class="form-check-label" for="radioEstado3">Rechazar</label>
-                                            </div>
-                                        <?php } ?>
-
-                                        <?php if ($estado == 2) { ?>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1">
-                                                <label class="form-check-label" for="radioEstado1">Pendiente</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2" checked="true" autocomplete="off">
-                                                <label class="form-check-label" for="radioEstado2">Aprobar</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">
-                                                <label class="form-check-label" for="radioEstado3">Rechazar</label>
-                                            </div>
-                                        <?php } ?>
-
-                                        <?php if ($estado == 3) { ?>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1" >
-                                                <label class="form-check-label" for="radioEstado1">Pendiente</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">
-                                                <label class="form-check-label" for="radioEstado2">Aprobar</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3" checked="true" autocomplete="off">
-                                                <label class="form-check-label" for="radioEstado3">Rechazar</label>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
-
-                            <div class="form-row">
-                                <br>
-                                <input type ="hidden" name="rutModificar" value="<?php echo $dto->getRut(); ?>"/>
-                                <input type="submit" class="btn btn-success btn-sm btn-block" value="Actualizar" name="btnActualizar" value="" />
                             </div>
-                        </form>
+                        </div>
+                        <br>
+                        <div class="container image-footer">
+                            <br>
+                            <div class="form-group" align="center">
+                                <?php $estado = SolicitudDaoImp::MostrarEstadoPorRut($dto->getRut()); ?>
+                                <label>Estado</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                                <?php if ($estado == 1) { ?>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1" checked="true" autocomplete="off">Pendiente
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">Pendiente
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">Pendiente
+                                    </label>
+                                <?php } ?>
+
+                                <?php if ($estado == 2) { ?>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1">Pendiente
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2" checked="true" autocomplete="off">Pendiente
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3">Pendiente
+                                    </label>
+                                <?php } ?>
+
+                                <?php if ($estado == 3) { ?>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "1" >Pendiente
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "2">Pendiente
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input class="form-check-input" type="radio" name="radioEstado" id="radioEstado" value= "3" checked="true" autocomplete="off">Pendiente
+                                    </label>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <div class="form-row">
+                            <br>
+                            <input type ="hidden" name="rutModificar" value="<?php echo $dto->getRut(); ?>"/>
+                            <input type="submit" class="btn btn-success btn-sm btn-block" value="Actualizar" name="btnActualizar" value="" />
+                        </div>
                     </div>
-                </div>
+
             </div>
-        </div>
+        </form>
+    </div>
 
-        <div class="overlay"></div>
-
-
-        <!-- jQuery CDN -->
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <!-- Bootstrap Js CDN -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- jQuery Custom Scroller CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <div class="overlay"></div>
 
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-                $('#dismiss, .overlay').on('click', function () {
-                    $('#sidebar').removeClass('active');
-                    $('.overlay').fadeOut();
-                });
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').addClass('active');
-                    $('.overlay').fadeIn();
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
             });
 
-            $(function () {
-                $("#checkHijos").click(function () {
-                    if ($(this).is(":checked")) {
-                        $("#txtHijos").removeAttr("disabled");
-                        $("#txtHijos").focus();
-                    } else {
-                        $("#txtHijos").attr("disabled", "disabled");
-                    }
-                });
+            $('#dismiss, .overlay').on('click', function () {
+                $('#sidebar').removeClass('active');
+                $('.overlay').fadeOut();
             });
 
-            function Error() {
-                swal({
-                    title: "Error!",
-                    text: "Error al enviar solicitud!",
-                    icon: "error",
-                    button: "Cerrar"
-                });
-            }
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').addClass('active');
+                $('.overlay').fadeIn();
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
 
-            function Success() {
-                swal({
-                    title: "Exito",
-                    text: "Solicitud enviada!",
-                    icon: "success",
-                    button: "Cerrar"
-                });
-            }
-        </script>
+        $(function () {
+            $("#checkHijos").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#txtHijos").removeAttr("disabled");
+                    $("#txtHijos").focus();
+                } else {
+                    $("#txtHijos").attr("disabled", "disabled");
+                }
+            });
+        });
 
-    </body>
+        function Error() {
+            swal({
+                title: "Error!",
+                text: "Error al enviar solicitud!",
+                icon: "error",
+                button: "Cerrar"
+            });
+        }
+
+        function Success() {
+            swal({
+                title: "Exito",
+                text: "Solicitud enviada!",
+                icon: "success",
+                button: "Cerrar"
+            });
+        }
+    </script>
+
+</body>
 </html>

@@ -1,4 +1,11 @@
 <?php session_start(); ?>
+<?php
+//if (!isset($_SESSION["rut"])) {
+//    echo '<script type="text/javascript">
+//document.location="v_login.php";
+//</script>';
+//}
+?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -108,8 +115,10 @@
 
                             </div>
                         </div>
-                    <?php }
-                } ?>
+                    <?php
+                    }
+                }
+                ?>
             </div>
         </div>
 
