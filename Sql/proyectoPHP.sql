@@ -3,8 +3,7 @@ SQLyog - Free MySQL GUI v5.11
 Host - 5.7.21 : Database - proyectophp
 *********************************************************************
 Server version : 5.7.21
-*/
-
+*/
 
 SET NAMES utf8;
 
@@ -114,22 +113,6 @@ insert into `estado_civil` (`id_estado`,`nombre`) values (2,'Casado');
 insert into `estado_civil` (`id_estado`,`nombre`) values (3,'Viudo');
 insert into `estado_civil` (`id_estado`,`nombre`) values (4,'Divorciado');
 
-/*Table structure for table `renta` */
-
-DROP TABLE IF EXISTS `renta`;
-
-CREATE TABLE `renta` (
-  `id_renta` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(25) NOT NULL,
-  PRIMARY KEY (`id_renta`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
-/*Data for the table `renta` */
-
-insert into `renta` (`id_renta`,`nombre`) values (1,'Fija');
-insert into `renta` (`id_renta`,`nombre`) values (2,'Variable');
-insert into `renta` (`id_renta`,`nombre`) values (3,'Boleta de Honorarios');
-
 /*Table structure for table `postulante` */
 
 DROP TABLE IF EXISTS `postulante`;
@@ -164,12 +147,27 @@ CREATE TABLE `postulante` (
 
 /*Data for the table `postulante` */
 
-insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('1','test','test','test','1992-12-12','M',0,'88545872','daniel@gmail.com','Lo Blanco 2123',1,642000,1,3,4,15);
-insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('104542165','Maria del Pilar','Sanhueza','Rodelindo','1980-03-04','F',1,'68783212','mdpsr@persona.com','San Jorge 441',1,570000,1,1,3,52);
+insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('1','USUARIO','BETA','TESTER','1992-12-12','F',2,'88545872','daniel@gmail.com','Lo Blanco 2123',0,642000,1,3,4,15);
+insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('104542165','Maria del Pilar','Sanhueza','Rodelindo','1980-03-04','F',1,'68783212','mdpsr@persona.com','San Jorge 441',0,570000,1,1,3,52);
 insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('105445202','Raul','Meza','Quinchavi','1976-01-28','M',1,'54200216','librealbedrio@r2d2.com','Av. Salvador 111',0,1115200,3,3,5,25);
 insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('187654825','Fernanda','Mellado','Rojas','1995-03-21','F',0,'88545872','fer.mellado21@gmail.com','Lo Blanco 2123',0,642000,2,2,4,15);
-insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('192445043','daniel','garcia','silva','2018-06-26','M',0,'648462435','daniel@gmail.com','aragon 418',0,123123123,1,2,5,12);
 insert into `postulante` (`rut`,`nombre`,`ap_paterno`,`ap_materno`,`fecha_nacimiento`,`sexo`,`hijos`,`telefono`,`email`,`direccion`,`enfermedad`,`sueldo`,`id_estado`,`id_renta`,`id_educacion`,`id_comuna`) values ('90701248','Roxana','Iturra','Valdez','1992-12-12','F',1,'75646832','roxyturra@gmail.com','Goicolea 982',1,2121540,1,2,2,2);
+
+/*Table structure for table `renta` */
+
+DROP TABLE IF EXISTS `renta`;
+
+CREATE TABLE `renta` (
+  `id_renta` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(25) NOT NULL,
+  PRIMARY KEY (`id_renta`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `renta` */
+
+insert into `renta` (`id_renta`,`nombre`) values (1,'Fija');
+insert into `renta` (`id_renta`,`nombre`) values (2,'Variable');
+insert into `renta` (`id_renta`,`nombre`) values (3,'Boleta de Honorarios');
 
 /*Table structure for table `solicitud` */
 
@@ -191,8 +189,7 @@ insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values 
 insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values (2,'187654825','2','2018-06-13');
 insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values (3,'105445202','1','2018-06-14');
 insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values (11,'90701248','3','2018-06-12');
-insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values (12,'192445043','1','2018-06-12');
-insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values (15,'1','1','2018-06-12');
+insert into `solicitud` (`id_solicitud`,`rut`,`estado`,`fecha_creacion`) values (15,'1','2','2018-06-12');
 
 /*Table structure for table `usuario` */
 
@@ -213,5 +210,6 @@ insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) va
 insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('104542165','clave123','Mariano','Fuentealba','Guerrero');
 insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('105445202','blackclover','Ignis','Pereira','Quintanilla');
 insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('187654825','password','Danilo','Garces','Da Silva');
-insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('192445043','admin','admin','','');
-insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('9070124','84años','','','');
+insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('192445043','admin','admin','-','-');
+insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('208503601','12345678','Roberto','Flores','Moya');
+insert into `usuario` (`rut`,`contrasena`,`nombre`,`ap_paterno`,`ap_materno`) values ('90701248','84años','Jorge','Guzman','Calderon');
