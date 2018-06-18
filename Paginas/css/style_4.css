@@ -30,6 +30,12 @@ div.image {
     height: 660px;
 }
 
+.btn-login{
+    position: absolute !important;
+    top: 40px;
+    left: 30px;
+    border-radius: 5px;
+}
 .logo{
     content:url(../css/img/logo.png);
     max-width: 150px; 
@@ -95,3 +101,6 @@ input:hover {
     content: 'Repita Contraseña';
 }
 
+i:hover{
+    color: background;
+}

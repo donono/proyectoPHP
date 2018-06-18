@@ -112,7 +112,9 @@
         </script>
     </head>
     <body>
-        <br><br><br>  
+        <br>
+        <a href="v_login.php" class="btn text-white btn-login"><i class="fas fa-angle-double-left fa-3x"></i></a>
+        <br>
         <div class="container image">
             <div class="container pt-2 outer-div">
                 <div class="container col-12 pl-5">
